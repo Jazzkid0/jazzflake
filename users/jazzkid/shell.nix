@@ -1,44 +1,9 @@
 { pkgs, lib, ... }:
 {
-   environment.systemPackages = with pkgs; [
-    vim
-    wget
-    curl
-    git
-    tree
-    neofetch
-    gcc
-    cmake
-    gnumake
-    tmux
-    zsh
-    neovim
-    rustup
-    ripgrep
-    bat
-    fzf
-    htop
-    unzip
-    wakelan
-    wireguard-tools
-    zoxide
-    starship
-    gleam
-    erlang_27
-    rebar3
-    nodejs
-    bun
-    inotify-tools
-    flyctl
-    fd
-    marksman
-    vimPlugins.rustaceanvim
-    openssl
-    lua-language-server
-    # claude-code
-    bunbun
-    jujutsu
-    carapace
-    difftastic
-  ];
+
+   # programs.zsh = {
+   #    enable = true;
+   #    enableCompletion = true;
+   # };
+
 }

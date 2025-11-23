@@ -1,25 +1,27 @@
-{ pkgs, lib, ... }:
-# System wide modules, defined within-user
-
+{ lib, ... }:
 {
-  users.users.jazzkid = {
-    isNormalUser = true;
-    home = "/home/jazzkid";
-    extraGroups = [ "networkmanager" "wheel" ]; # Enable ‘sudo’ for the user.
-  };
-  nix.settings.trusted-users = ["jazzkid"];
+  services.xserver.enable = false;
+  xdg.portal.enable = false;
+  security.polkit.enable = lib.mkForce false;
+
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedUDPPorts = [ 443 ];
+
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
+
+  systemd.watchdog.runtimeTime = "60s";
+  systemd.watchdog.rebootTime = "60s";
 
   nixpkgs.config.allowUnfree = true;
 
   services.nginx = {
     enable = true;
-    virtualHosts."dev.jazzkid.xyz" = {
-      locations."/".proxyPass = "http://localhost:8080";
-    };
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
   };
-
-
-  users.defaultUserShell = pkgs.zsh;
-
-  environment.variables.EDITOR = "vim";
 }

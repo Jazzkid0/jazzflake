@@ -26,7 +26,7 @@
                     home-manager.nixosModules.home-manager
                     {
                         home-manager.useGlobalPkgs = true;
-                        home-manager.useUserPkgs = true;
+                        # home-manager.useUserPkgs = true;
                         home-manager.extraSpecialArgs = { inherit inputs; };
                         home-manager.users.${user} = import ./users/${user}/home.nix;
                     }
@@ -46,7 +46,6 @@
                     user = "jazzkid";
                     modules = [
                         ./modules/server/server.nix
-                        ./modules/common/networking.nix
                     ];
                 };
             };
