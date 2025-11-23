@@ -41,11 +41,12 @@
                         # gui modules go here
                     ];
                 };
-                jazzserver = mksystem {
+                jazzserver = mkSystem {
                     hostname = "jazzserver";
                     user = "jazzkid";
                     modules = [
                         ./modules/server/server.nix
+                        ./modules/common/networking.nix
                     ];
                 };
             };
@@ -56,9 +57,19 @@
                         hostname = "100.112.41.121";
                         profiles.system = {
                             user = "root";
+                            nodes = {
+                                jazzserver = {
+                                    hostname = "100.112.41.121";
+                                    profiles.system = {
+                                        user = "root";
+                                        path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.jazzserver;
+                                    };
+                                };
+                            };
                         };
                     };
                 };
             };
+            checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
         };
 }
