@@ -15,7 +15,7 @@
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
-    openssh.authorizedKeys = [
+    openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAvWLv+pEt4tnil5IsMrh/BVqRZLbsuOZZ9MycuH8K6n jazzpc"
     ];
   };
@@ -29,7 +29,7 @@
 
   programs.mosh.enable = true;
 
-  users.users.root.openssh.authorizedKeys = [
+  users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAvWLv+pEt4tnil5IsMrh/BVqRZLbsuOZZ9MycuH8K6n jazzpc"
   ];
 
