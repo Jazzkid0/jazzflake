@@ -39,6 +39,5 @@
       jujutsu
       carapace
       difftastic
-# claude-code
   ];
 }

@@ -16,5 +16,6 @@
     vim
     ripgrep
     htop
+    tmux
   ];
 }

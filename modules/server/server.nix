@@ -12,9 +12,6 @@
   systemd.targets.hibernate.enable = false;
   systemd.targets.hybrid-sleep.enable = false;
 
-  # systemd.settings.Manager.RuntimeWatchdogSec = "60s";
-  # systemd.settings.Manager.RebootWatchdogSec = "60s";
-
   nixpkgs.config.allowUnfree = true;
 
   services.nginx = {
