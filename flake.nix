@@ -56,7 +56,7 @@
                 user = "root";
                 nodes = {
                     jazzserver = {
-                        hostname = "100.112.41.121";
+                        hostname = "dev.jazzkid.xyz";
                         profiles.system = {
                             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.jazzserver;
                         };
