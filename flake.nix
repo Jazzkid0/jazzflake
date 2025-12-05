@@ -4,7 +4,10 @@
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
         nixos-hardware.url = "github:nixos/nixos-hardware/master";
-        deploy-rs.url = "github:serokell/deploy-rs";
+        deploy-rs = {
+            url = "github:serokell/deploy-rs";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
         home-manager = {
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -18,7 +21,7 @@
     outputs = { self, nixpkgs, nixos-hardware, deploy-rs, home-manager, agenix, ... }@inputs:
         let
             mkSystem = { hostname, user, modules }: nixpkgs.lib.nixosSystem {
-                specialArgs = { inherit inputs; };
+                specialArgs = { inherit inputs self; };
                 modules = [
                     ./hosts/${hostname}/default.nix
                     ./modules/common/common.nix
@@ -26,7 +29,6 @@
                     home-manager.nixosModules.home-manager
                     {
                         home-manager.useGlobalPkgs = true;
-                        # home-manager.useUserPkgs = true;
                         home-manager.extraSpecialArgs = { inherit inputs; };
                         home-manager.users.${user} = import ./users/${user}/home.nix;
                     }
@@ -34,13 +36,13 @@
             };
         in {
             nixosConfigurations = {
-                jazzpc = mkSystem {
-                    hostname = "jazzpc";
-                    user = "jazzkid";
-                    modules = [
-                        # gui modules go here
-                    ];
-                };
+                # jazzpc = mkSystem {
+                #     hostname = "jazzpc";
+                #     user = "jazzkid";
+                #     modules = [
+                #         # gui modules go here
+                #     ];
+                # };
                 jazzserver = mkSystem {
                     hostname = "jazzserver";
                     user = "jazzkid";
@@ -51,20 +53,12 @@
             };
             deploy = {
                 sshUser = "root";
+                user = "root";
                 nodes = {
                     jazzserver = {
                         hostname = "100.112.41.121";
                         profiles.system = {
-                            user = "root";
-                            nodes = {
-                                jazzserver = {
-                                    hostname = "dev.jazzkid.xyz";
-                                    profiles.system = {
-                                        user = "root";
-                                        path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.jazzserver;
-                                    };
-                                };
-                            };
+                            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.jazzserver;
                         };
                     };
                 };
