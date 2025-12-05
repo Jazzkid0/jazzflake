@@ -39,5 +39,6 @@
       jujutsu
       carapace
       difftastic
+      deploy-rs
   ];
 }
