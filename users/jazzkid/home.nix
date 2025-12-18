@@ -2,7 +2,12 @@
 {
 
    imports = [
-      ./shell.nix
+      ./zsh.nix
+      ./git.nix
+      ./starship.nix
+      ./programs.nix
+      ./tmux.nix
+      ./neovim.nix
       ./packages.nix
    ];
 

@@ -16,6 +16,10 @@
             url = "github:ryantm/agenix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        nvim-config = {
+            url = "github:Jazzkid0/nvim";
+            flake = false;
+        };
     };
 
     outputs = { self, nixpkgs, nixos-hardware, deploy-rs, home-manager, agenix, ... }@inputs:

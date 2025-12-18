@@ -10,19 +10,12 @@
       gcc
       cmake
       gnumake
-      tmux
-      zsh
-      neovim
       rustup
       ripgrep
-      bat
       fzf
-      htop
       unzip
       wakelan
       wireguard-tools
-      zoxide
-      starship
       gleam
       erlang_27
       rebar3
@@ -36,7 +29,6 @@
       openssl
       lua-language-server
       bunbun
-      jujutsu
       carapace
       difftastic
       deploy-rs

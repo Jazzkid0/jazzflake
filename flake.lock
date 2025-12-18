@@ -156,13 +156,30 @@
         "type": "github"
       }
     },
+    "nvim-config": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1766090258,
+        "narHash": "sha256-ZPZkeslDyb00I6Bm8lcBi1Lo2wbNF8DVoHkJaYcQiL4=",
+        "owner": "Jazzkid0",
+        "repo": "nvim",
+        "rev": "c43cef5ca8afd9d66f45027c34a99f9366b1e023",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Jazzkid0",
+        "repo": "nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
         "deploy-rs": "deploy-rs",
         "home-manager": "home-manager_2",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "nvim-config": "nvim-config"
       }
     },
     "systems": {
