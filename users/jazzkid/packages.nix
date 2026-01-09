@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
-   home.packages = with pkgs; [
+   home.packages = (with pkgs; [
       vim
       wget
       curl
@@ -32,5 +32,7 @@
       carapace
       difftastic
       deploy-rs
-  ];
+   ]) ++ [
+      inputs.claude-code.packages.${pkgs.system}.claude-code-bun
+   ];
 }

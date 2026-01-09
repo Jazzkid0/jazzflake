@@ -20,6 +20,10 @@
             url = "github:Jazzkid0/nvim";
             flake = false;
         };
+        claude-code = {
+            url = "github:sadjow/claude-code-nix";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
     outputs = { self, nixpkgs, nixos-hardware, deploy-rs, home-manager, agenix, ... }@inputs:
