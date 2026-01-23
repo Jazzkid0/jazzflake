@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   programs.zsh = {
     enable = true;
@@ -21,6 +21,7 @@
       resource = "source ~/.zshrc";
       nvim-latest = ''nix run "github:nix-community/neovim-nightly-overlay"'';
       claude = "claude-bun";
+      rmd = "rich --markdown --force-terminal --center --text-center --padding 2,4 --theme monokai --width 80";
 
       # git auth
       gitauth_jazzkid = ''eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519_jonnnyk'';
