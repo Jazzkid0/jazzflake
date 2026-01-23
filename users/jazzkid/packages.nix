@@ -32,6 +32,7 @@
       carapace
       difftastic
       deploy-rs
+      nixd
       rich-cli
    ]) ++ [
       inputs.claude-code.packages.${pkgs.system}.claude-code-bun
