@@ -36,5 +36,6 @@
       rich-cli
    ]) ++ [
       inputs.claude-code.packages.${pkgs.system}.claude-code-bun
+      inputs.opencode.packages.${pkgs.system}.default
    ];
 }

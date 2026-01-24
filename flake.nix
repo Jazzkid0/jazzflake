@@ -3,7 +3,7 @@
 
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-        nixos-hardware.url = "github:nixos/nixos-hardware/master";
+        # nixos-hardware.url = "github:nixos/nixos-hardware/master";
         deploy-rs = {
             url = "github:serokell/deploy-rs";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -24,9 +24,13 @@
             url = "github:sadjow/claude-code-nix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        opencode = {
+            url = "github:anomalyco/opencode";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
-    outputs = { self, nixpkgs, nixos-hardware, deploy-rs, home-manager, agenix, ... }@inputs:
+    outputs = { self, nixpkgs, deploy-rs, home-manager, agenix, ... }@inputs:
         let
             mkSystem = { hostname, user, modules }: nixpkgs.lib.nixosSystem {
                 specialArgs = { inherit inputs self; };
@@ -44,6 +48,7 @@
             };
         in {
             nixosConfigurations = {
+
                 # jazzpc = mkSystem {
                 #     hostname = "jazzpc";
                 #     user = "jazzkid";
@@ -51,6 +56,13 @@
                 #         # gui modules go here
                 #     ];
                 # };
+
+                # jazznas = mkSystem {
+                #     hostname = "jazzpc;
+                #     user = "jazzkid";
+                #     modules = [ networking?]
+                # };
+
                 jazzserver = mkSystem {
                     hostname = "jazzserver";
                     user = "jazzkid";
@@ -69,6 +81,14 @@
                             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.jazzserver;
                         };
                     };
+
+                    # jazznas = {
+                    #     hostname = "nas.jazzkid.xyz";
+                    #     profiles.system = {
+                    #         path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.jazznas;
+                    #     };
+                    # };
+
                 };
             };
             checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
