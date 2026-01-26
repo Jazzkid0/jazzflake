@@ -1,41 +1,43 @@
 { pkgs, inputs, ... }:
 {
-   home.packages = (with pkgs; [
-      vim
-      wget
-      curl
-      git
-      tree
-      neofetch
-      gcc
-      cmake
-      gnumake
-      rustup
-      ripgrep
-      fzf
-      unzip
-      wakelan
-      wireguard-tools
-      gleam
-      erlang_27
-      rebar3
-      nodejs
-      bun
-      inotify-tools
-      flyctl
-      fd
-      marksman
-      vimPlugins.rustaceanvim
-      openssl
-      lua-language-server
-      bunbun
-      carapace
-      difftastic
-      deploy-rs
-      nixd
-      rich-cli
-   ]) ++ [
-      inputs.claude-code.packages.${pkgs.system}.claude-code-bun
-      inputs.opencode.packages.${pkgs.system}.default
-   ];
+  home.packages = (with pkgs; [
+    vim
+    wget
+    curl
+    git
+    tree
+    neofetch
+    gcc
+    cmake
+    gnumake
+    rustup
+    ripgrep
+    fzf
+    unzip
+    wakelan
+    wireguard-tools
+    gleam
+    erlang_27
+    rebar3
+    nodejs
+    bun
+    inotify-tools
+    flyctl
+    fd
+    marksman
+    vimPlugins.rustaceanvim
+    openssl
+    lua-language-server
+    bunbun
+    carapace
+    difftastic
+    deploy-rs
+    nixd
+    rich-cli
+    dig
+    lego
+  ]) ++ [
+    inputs.claude-code.packages.${pkgs.system}.claude-code-bun
+    inputs.opencode.packages.${pkgs.system}.default
+  ];
 }
