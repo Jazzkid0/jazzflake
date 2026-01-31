@@ -28,10 +28,6 @@
             url = "github:sadjow/claude-code-nix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        opencode = {
-            url = "github:anomalyco/opencode";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
     };
 
     outputs = { self, nixpkgs, deploy-rs, home-manager, agenix, nixarr, ... }@inputs:

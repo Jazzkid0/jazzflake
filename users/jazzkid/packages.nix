@@ -36,8 +36,9 @@
     rich-cli
     dig
     lego
+    dust
+    typescript-language-server
   ]) ++ [
-    inputs.claude-code.packages.${pkgs.system}.claude-code-bun
-    inputs.opencode.packages.${pkgs.system}.default
+    inputs.claude-code.packages.${pkgs.system}.default
   ];
 }

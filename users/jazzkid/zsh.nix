@@ -20,7 +20,6 @@
       wakepc = "wakelan -m B0:6E:BF:DB:44:8C -b 192.168.1.100";
       resource = "source ~/.zshrc";
       nvim-latest = ''nix run "github:nix-community/neovim-nightly-overlay"'';
-      claude = "claude-bun";
       rmd = "rich --markdown --force-terminal --center --text-center --padding 2,4 --theme monokai --width 80";
       rmf = "rmd $(fzf) | less";
 
