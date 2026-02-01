@@ -38,6 +38,8 @@
     lego
     dust
     typescript-language-server
+    python3
+    uv
   ]) ++ [
     inputs.claude-code.packages.${pkgs.system}.default
   ];
