@@ -66,13 +66,13 @@
       bind-key -n M-S switch -t 2
       bind-key -n M-R switch -t 3
       bind-key -n M-A switch -t 4
+      bind-key -n M-D switch -t 5
+      bind-key -n M-C switch -t 6
+      bind-key -n M-X switch -t 7
+      bind-key -n M-Z switch -t 8
       bind-key -n M-G switch -n
       bind-key -n M-B switch -p
       bind-key -n M-F choose-tree
-      bind-key -n M-D switch -t notes
-      bind-key -n M-C switch -t config
-      bind-key -n M-X switch -t nix
-      bind-key -n M-Z switch -t test
 
       # switch windows alt+number
       bind-key -n M-1 select-window -t 1
@@ -87,6 +87,12 @@
 
       # colors
       set -ag terminal-overrides ",$TERM:Tc"
+
+      # Use manual window names
+      set-option -g automatic-rename off
+      set-option -g allow-rename off
+      set -g @catppuccin_window_text " #W"
+      set -g @catppuccin_window_current_text " #W"
     '';
   };
 }
