@@ -38,7 +38,7 @@
   };
 
 
-  networking.firewall.allowedTCPPorts = [ 8080 ];
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 8080 ];
 
   services.nginx.virtualHosts."qbittorrent.jazzkid.xyz" = {
     forceSSL = true;
