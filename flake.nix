@@ -61,7 +61,8 @@
                     hostname = "jazznas";
                     user = "jazzkid";
                     modules = [
-                        # NAS-specific modules will be added in Phase 5
+                        nixarr.nixosModules.default
+                        # NAS-specific service modules will be added in default.nix
                     ];
                 };
 

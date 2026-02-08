@@ -11,4 +11,13 @@
     ./zoxide.nix
     ./htop.nix
   ];
+
+  programs.ssh = {
+    enable = true;
+    extraConfig = ''
+      Host nas.jazzkid.xyz
+        HostName nas.jazzkid.xyz
+        User jazzkid
+    '';
+  };
 }
