@@ -40,6 +40,7 @@
     typescript-language-server
     python3
     uv
+    ragenix
   ]) ++ [
     inputs.claude-code.packages.${pkgs.system}.default
   ];

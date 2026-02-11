@@ -14,20 +14,20 @@
       User = "qbittorrent";
       Environment = "HOME=/var/lib/qbittorrent";
     };
-
-    preStart = ''
-      mkdir -p /var/lib/qbittorrent/.config/qBittorrent/config
-      cp /etc/nixos/qbittorrent/qBittorrent.conf /var/lib/qbittorrent/.config/qBittorrent/config/qBittorrent.conf
-      chown -R qbittorrent:media /var/lib/qbittorrent/.config/qBittorrent/config
-      chmod 644 /var/lib/qbittorrent/.config/qBittorrent/config/qBittorrent.conf
-    '';
   };
 
-  environment.etc."nixos/qbittorrent/qBittorrent.conf".text = ''
-    [Preferences]
-    WebUI\Username=jazzkid
-    WebUI\Password_PBKDF2=@ByteArray(wXbS4Ld0uoHO2NjYfwPYdQ==:Fc1CSYqQw7lkGqUmDkNDXKQ1p1XDAnp7XJXAtzK3srH6J0msvTTaukUjeBXlRggdH/Bhg2sVhxuOnmZL2HajDQ==)
-    WebUI\Port=8080
+  age.secrets.qbittorrent_conf = {
+    file = ../../secrets/qbittorrent_conf.age;
+    owner = "qbittorrent";
+    group = "media";
+    mode = "0400";
+  };
+
+  preStart = ''
+    mkdir -p /var/lib/qbittorrent/.config/qBittorrent/config
+    cp ${config.age.secrets.qbittorrent_conf.path} /var/lib/qbittorrent/.config/qBittorrent/config/qBittorrent.conf
+    chown qbittorrent:media /var/lib/qbittorrent/.config/qBittorrent/config/qBittorrent.conf
+    chmod 400 /var/lib/qbittorrent/.config/qBittorrent/config/qBittorrent.conf
   '';
 
   users.users.qbittorrent = {
