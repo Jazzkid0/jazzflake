@@ -14,10 +14,15 @@
 
   programs.ssh = {
     enable = true;
-    extraConfig = ''
-      Host nas.jazzkid.xyz
-        HostName nas.jazzkid.xyz
-        User jazzkid
-    '';
+    enableDefaultConfig = false;
+    matchBlocks = {
+      "*" = {
+        forwardAgent = true;
+      };
+      "nas.jazzkid.xyz" = {
+        hostname = "nas.jazzkid.xyz";
+        user = "jazzkid";
+      };
+    };
   };
 }
