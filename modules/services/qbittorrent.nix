@@ -14,6 +14,14 @@
       User = "qbittorrent";
       Environment = "HOME=/var/lib/qbittorrent";
     };
+
+    preStart = ''
+      mkdir -p /var/lib/qbittorrent/.config/qBittorrent/config
+      cp ${config.age.secrets.qbittorrent_conf.path} /var/lib/qbittorrent/.config/qBittorrent/config/qBittorrent.conf
+      chown qbittorrent:media /var/lib/qbittorrent/.config/qBittorrent/config/qBittorrent.conf
+      chmod 400 /var/lib/qbittorrent/.config/qBittorrent/config/qBittorrent.conf
+    '';
+
   };
 
   age.secrets.qbittorrent_conf = {
@@ -23,13 +31,6 @@
     mode = "0400";
   };
 
-  preStart = ''
-    mkdir -p /var/lib/qbittorrent/.config/qBittorrent/config
-    cp ${config.age.secrets.qbittorrent_conf.path} /var/lib/qbittorrent/.config/qBittorrent/config/qBittorrent.conf
-    chown qbittorrent:media /var/lib/qbittorrent/.config/qBittorrent/config/qBittorrent.conf
-    chmod 400 /var/lib/qbittorrent/.config/qBittorrent/config/qBittorrent.conf
-  '';
-
   users.users.qbittorrent = {
     isSystemUser = true;
     group = "media";
@@ -38,7 +39,12 @@
   };
 
 
-  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 8080 ];
+  # LAN access for WebUI
+  networking.firewall.allowedTCPPorts = [ 8080 ];
+
+  # Tailscale access for WebUI and torrent peers
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 8080 51413 ];
+  networking.firewall.interfaces.tailscale0.allowedUDPPorts = [ 51413 ];
 
   services.nginx.virtualHosts."qbittorrent.jazzkid.xyz" = {
     forceSSL = true;

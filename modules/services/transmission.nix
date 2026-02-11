@@ -41,4 +41,8 @@
       '';
     };
   };
+
+  # Tailscale access for torrent peers
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 51413 ];
+  networking.firewall.interfaces.tailscale0.allowedUDPPorts = [ 51413 ];
 }
