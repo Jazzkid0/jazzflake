@@ -1,1 +1,4 @@
 result
+result-*
+.direnv
+.age-regen-info
