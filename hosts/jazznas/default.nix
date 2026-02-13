@@ -20,6 +20,8 @@
     ../../modules/services/jellyseerr.nix
   ];
 
+  age.identityPaths = [ "/home/jazzkid/.ssh/id_ed25519" ];
+
   # Tailscale - host-specific
   services.tailscale = {
     useRoutingFeatures = "both";

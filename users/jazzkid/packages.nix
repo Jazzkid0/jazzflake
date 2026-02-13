@@ -41,6 +41,7 @@
     python3
     uv
     ragenix
+    nmap
   ]) ++ [
     inputs.claude-code.packages.${pkgs.system}.default
   ];
