@@ -39,10 +39,8 @@
   };
 
 
-  # LAN access for WebUI
   networking.firewall.allowedTCPPorts = [ 8080 ];
 
-  # Tailscale access for WebUI and torrent peers
   networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 8080 51413 ];
   networking.firewall.interfaces.tailscale0.allowedUDPPorts = [ 51413 ];
 

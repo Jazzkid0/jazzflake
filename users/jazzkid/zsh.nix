@@ -23,21 +23,8 @@
       rmd = "rich --markdown --force-terminal --center --text-center --padding 2,4 --theme monokai --width 80";
       rmf = "rmd $(fzf) | less";
 
-      # git auth
-      gitauth_jazzkid = ''eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519_jonnnyk'';
-      gitauth_jknightdev = ''eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519_jknightdev'';
-
-      # vim-style exit
       ":q" = "exit";
-
-      # tmux shortcuts
       t = "tmux attach";
-      tls = "tmux list-sessions";
-      tks = "tmux kill-session -t";
-      ta = "tmux attach -t";
-      ts = "tmux new-session -s";
-      tsw = "tmux switch -t";
-      tct = "tmux choose-tree";
 
       # grep with color
       grep = "grep --color=auto";

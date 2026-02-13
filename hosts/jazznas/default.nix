@@ -22,23 +22,18 @@
 
   age.identityPaths = [ "/home/jazzkid/.ssh/id_ed25519" ];
 
-  # Tailscale - host-specific
   services.tailscale = {
     useRoutingFeatures = "both";
   };
 
-  # Boot configuration
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Networking
   networking.hostName = "jazznas";
   networking.networkmanager.enable = true;
 
-  # Nix settings
   nix.settings.trusted-users = [ "jazzkid" ];
 
-  # User configuration (reduced SSH keys per security review)
   users.users.jazzkid = {
     isNormalUser = true;
     description = "jazzkid";
@@ -63,6 +58,5 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIbpMhMLZqxJXZxKF8PsNtjV69h2HbRwA4HFRAURqjB4 jazzkid@jazznas"
   ];
 
-  # System state (DO NOT EDIT)
   system.stateVersion = "24.11";
 }

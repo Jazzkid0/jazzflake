@@ -58,6 +58,5 @@
     openFirewall = true;
   };
 
-  # Tailscale access for SMB shares
   networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 445 137 138 ];
 }
