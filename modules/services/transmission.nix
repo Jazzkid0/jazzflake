@@ -24,6 +24,8 @@
     extraSettings = {
       rpc-username = "jazzkid";
       rpc-whitelist-enabled = false;
+      rpc-host-whitelist-enabled = true;
+      rpc-host-whitelist = "transmission.jazzkid.xyz,localhost,127.0.0.1";
       download-dir = "/srv/media/media-lib/downloads";
       incomplete-dir = "/srv/media/media-lib/downloads/incomplete";
     };
