@@ -8,6 +8,16 @@ This is a NixOS flake-based configuration repository managing multiple hosts (ja
 
 ## Common Commands
 
+### Version Control (jj)
+```bash
+# This repository uses jj (jujutsu), not git
+jj status           # Show working copy status
+jj log              # Show commit history
+jj diff             # Show changes
+jj new <change>     # Create new change
+jj abandon <id>     # Abandon a change
+```
+
 ### Building and Testing
 ```bash
 # Build the flake (outputs are in ./result)
@@ -59,9 +69,10 @@ The `flake.nix` defines a `mkSystem` helper that creates NixOS configurations wi
 
 ### Key Directories
 - `hosts/` - Per-host configurations (jazznas, jazzserver, jazzpc)
+- `hosts/jazznas/hardware/` - Hardware-specific configuration (disks.nix, mounts.nix)
 - `modules/common/` - Base system configuration (common.nix, networking.nix, security.nix, gui.nix)
 - `modules/server/` - Server-specific optimizations
-- `modules/services/` - Individual service configurations (nginx, jellyfin, radarr, sonarr, qbittorrent, samba, etc.)
+- `modules/services/` - Individual service configurations (bazarr, jellyfin, jellyseerr, lidarr, nginx, prowlarr, qbittorrent, radarr, readarr, samba, sonarr, transmission)
 - `users/` - Home Manager user configurations
 - `secrets/` - Agenix-managed encrypted secrets
 
@@ -82,6 +93,7 @@ The `flake.nix` defines a `mkSystem` helper that creates NixOS configurations wi
 - `deploy-rs` - Remote deployment
 - `home-manager` - User environment management
 - `agenix` - Secret encryption
+- `fenix` - Rust toolchain
 - `nixarr` - Media server stack
 - `nvim-config` - Neovim configuration (non-flake)
 - `claude-code` - Claude Code Nix integration
