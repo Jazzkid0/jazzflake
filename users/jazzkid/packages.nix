@@ -10,7 +10,6 @@
     gcc
     cmake
     gnumake
-    rustup
     ripgrep
     fzf
     unzip
@@ -44,5 +43,6 @@
     nmap
   ]) ++ [
     inputs.claude-code.packages.${pkgs.system}.default
+    inputs.fenix.packages.${pkgs.system}.latest.toolchain
   ];
 }

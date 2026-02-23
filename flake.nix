@@ -16,6 +16,14 @@
             url = "github:ryantm/agenix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        claude-code = {
+            url = "github:sadjow/claude-code-nix";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+        fenix = {
+            url = "github:nix-community/fenix";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
         nixarr = {
             url = "github:rasmus-kirk/nixarr";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -24,13 +32,9 @@
             url = "github:Jazzkid0/nvim";
             flake = false;
         };
-        claude-code = {
-            url = "github:sadjow/claude-code-nix";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
     };
 
-    outputs = { self, nixpkgs, deploy-rs, home-manager, agenix, nixarr, ... }@inputs:
+    outputs = { self, nixpkgs, deploy-rs, home-manager, agenix, nixarr, fenix, ... }@inputs:
         let
             mkSystem = { hostname, user, modules }: nixpkgs.lib.nixosSystem {
                 specialArgs = { inherit inputs self agenix nixarr; };
