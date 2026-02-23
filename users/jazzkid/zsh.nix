@@ -11,6 +11,8 @@
     };
 
     shellAliases = {
+      t = "tmux attach";
+
       # ls aliases
       la = "ls -A";
       ll = "ls -shalF";
@@ -19,12 +21,12 @@
       # utility
       wakepc = "wakelan -m B0:6E:BF:DB:44:8C -b 192.168.1.100";
       resource = "source ~/.zshrc";
+
+      # misc
       nvim-latest = ''nix run "github:nix-community/neovim-nightly-overlay"'';
       rmd = "rich --markdown --force-terminal --center --text-center --padding 2,4 --theme monokai --width 80";
-      rmf = "rmd $(fzf) | less";
-
-      ":q" = "exit";
-      t = "tmux attach";
+      rmf = "rmd $(fzf) | less"; # TODO: view markdown in nvim buffer
+      jjts =  ''jj ci -m"$(date +"%F|%T|%A")"'';
 
       # grep with color
       grep = "grep --color=auto";
