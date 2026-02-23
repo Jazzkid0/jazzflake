@@ -11,8 +11,9 @@
     plugins = with pkgs.tmuxPlugins; [
       sensible
       vim-tmux-navigator
+      better-mouse-mode
+      fzf-tmux-url
       yank
-      catppuccin
     ];
 
     extraConfig = ''
@@ -34,7 +35,6 @@
       bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
 
       # pane base index
-      set -g pane-base-index 1
       set-window-option -g pane-base-index 1
       set-option -g renumber-windows on
 
@@ -50,6 +50,8 @@
       bind -n M-c split-window -v -c "#{pane_current_path}"
       bind -n M-p swap-pane -D
       bind -n M-f swap-pane -U
+
+      ####---- COLEMAK-MDH BINDS ----####
 
       # Shift + Alt + right hand for windows
       bind-key -n M-N select-window -t 1
@@ -85,14 +87,31 @@
       bind-key -n M-8 select-window -t 8
       bind-key -n M-9 select-window -t 9
 
+      ## styling ##
+
       # colors
       set -ag terminal-overrides ",$TERM:Tc"
+      set -g status-style bg=black,fg=white
 
-      # Use manual window names
+      # manual window names
       set-option -g automatic-rename off
       set-option -g allow-rename off
-      set -g @catppuccin_window_text " #W"
-      set -g @catppuccin_window_current_text " #W"
+
+      # Inactive window style
+      set -g window-status-style bg=black
+      set -g window-status-format "#[fg=black,bold, bg=magenta] #I #[fg=black,nobold, bg=color8] #W #[default]"
+
+      # Active window style
+      set -g window-status-current-style bg=black
+      set -g window-status-current-format "#[fg=black,bold, bg=cyan] #I #[fg=black,nobold, bg=color7] #W #[default]"
+
+      # left
+      set -g status-left-length 20
+      set -g status-left "#[fg=black,bold, bg=yellow] #S #[bg=black] #[default]"
+
+      # right
+      set -g status-right-length 40
+      set -g status-right " %F #[fg=black, bg=yellow] %T #[default]"
     '';
   };
 }
