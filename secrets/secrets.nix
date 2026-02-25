@@ -7,5 +7,6 @@ in
 {
   "cloudflare_apiTokenFile.age".publicKeys = keys;
   "transmission_credentialsFile.age".publicKeys = keys;
+  "silverbullet_credentialsFile.age".publicKeys = keys;
   "qbittorrent_conf.age".publicKeys = keys;
 }

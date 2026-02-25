@@ -18,6 +18,7 @@
     ../../modules/services/readarr.nix
     ../../modules/services/bazarr.nix
     ../../modules/services/jellyseerr.nix
+    ../../modules/services/silverbullet.nix
   ];
 
   age.identityPaths = [ "/home/jazzkid/.ssh/id_ed25519" ];
