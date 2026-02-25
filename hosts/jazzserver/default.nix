@@ -29,9 +29,14 @@
 
   nix.settings.trusted-users = ["jazzkid"];
   services.nginx.virtualHosts."dev.jazzkid.xyz" = {
-    # forceSSL = true; # need to fix certs
+    # TODO: Fix certs
+    # forceSSL = true;
     # enableACME = true;
-    locations."/".proxyPass = "http://localhost:8080";
+    # acmeRoot = null;
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:8080";
+      proxyWebsockets = true;
+    };
   };
 
   users.users.root.openssh.authorizedKeys.keys = [
