@@ -38,7 +38,6 @@
     acmeRoot = null;
     locations."/" = {
       proxyPass = "http://127.0.0.1:9091";
-      proxyWebsockets = true;
       extraConfig = ''
         proxy_set_header X-Transmission-Session-Id $http_x_transmission_session_id;
       '';
@@ -46,6 +45,6 @@
   };
 
   # Tailscale access for torrent peers
-  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 51413 ];
-  networking.firewall.interfaces.tailscale0.allowedUDPPorts = [ 51413 ];
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 50000 ];
+  networking.firewall.interfaces.tailscale0.allowedUDPPorts = [ 50000 ];
 }
