@@ -42,6 +42,7 @@
     ragenix
     nmap
     steam-run
+    pay-respects
   ]) ++ [
     inputs.claude-code.packages.${pkgs.system}.default
     inputs.fenix.packages.${pkgs.system}.latest.toolchain
