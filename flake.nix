@@ -53,13 +53,13 @@
         in {
             nixosConfigurations = {
 
-                # jazzpc = mkSystem {
-                #     hostname = "jazzpc";
-                #     user = "jazzkid";
-                #     modules = [
-                #         # gui modules go here
-                #     ];
-                # };
+                jazzpc = mkSystem {
+                    hostname = "jazzpc";
+                    user = "jazzkid";
+                    modules = [
+                        # gui modules go here (Phase 2)
+                    ];
+                };
 
                 jazznas = mkSystem {
                     hostname = "jazznas";
