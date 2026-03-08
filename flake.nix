@@ -3,7 +3,7 @@
 
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-        # nixos-hardware.url = "github:nixos/nixos-hardware/master";
+        nixos-hardware.url = "github:nixos/nixos-hardware/master";
         deploy-rs = {
             url = "github:serokell/deploy-rs";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -34,10 +34,10 @@
         };
     };
 
-    outputs = { self, nixpkgs, deploy-rs, home-manager, agenix, nixarr, fenix, ... }@inputs:
+    outputs = { self, nixpkgs, deploy-rs, home-manager, agenix, nixarr, fenix, nixos-hardware, ... }@inputs:
         let
             mkSystem = { hostname, user, modules }: nixpkgs.lib.nixosSystem {
-                specialArgs = { inherit inputs self agenix nixarr; };
+                specialArgs = { inherit inputs self agenix nixarr nixos-hardware; };
                 modules = [
                     ./hosts/${hostname}/default.nix
                     ./modules/common/common.nix
