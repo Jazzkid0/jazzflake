@@ -1,12 +1,12 @@
 { config, lib, ... }:
 {
   imports = [
+      ./fonts.nix
       ./hyprland.nix
       ./waybar.nix
       # still deciding on a terminal, install both for now
-      # ./alacritty.nix
+      ./alacritty.nix
       # ./ghostty.nix
-      # need to get a monospaced nerd font on this system, I prefer roboto mono
 
       # not familiar with common programs, but these have been recommended to me
       # ./hyprpaper.nix # wallpapers

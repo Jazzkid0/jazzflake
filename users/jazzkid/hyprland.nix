@@ -55,7 +55,7 @@
         "$mod SHIFT, K, exit"
         "$mod, K, killactive"
         "$mod, D, exec, wofi"
-        # "$mod, H, exec, alacritty"
+        "$mod, H, exec, alacritty"
         "$mod, F, fullscreen"
         "$mod SHIFT, F, togglefloating"
 
