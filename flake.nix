@@ -57,7 +57,7 @@
                     hostname = "jazzpc";
                     user = "jazzkid";
                     modules = [
-                        # gui modules go here (Phase 2)
+                        ./modules/common/gui.nix
                     ];
                 };
 
