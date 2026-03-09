@@ -1,9 +1,11 @@
-{ pkgs, ... }: {
+{ pkgs, lib, gui ? false, ... }: {
 
   imports = [
     ./networking.nix
     ./security.nix
-  ];
+   ] ++ lib.optionals gui [
+      ./gui.nix
+   ];
 
   time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";

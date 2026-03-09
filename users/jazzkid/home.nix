@@ -1,9 +1,11 @@
-{ ... }:
-{
+{ config, lib, gui ? false, ... }:
 
+{
    imports = [
       ./programs.nix
       ./packages.nix
+   ] ++ lib.optionals gui [
+      ./gui.nix
    ];
 
    home.username = "jazzkid";
