@@ -13,8 +13,6 @@
       #monitor = ",preferred,auto,1"
 
       exec-once = [
-        "waybar"
-        "foot"
       ];
 
       general = {
@@ -56,11 +54,12 @@
       bind = [
         "$mod SHIFT, K, exit"
         "$mod, K, killactive"
-        "$mod, H, foot"
+        "$mod, D, exec, wofi"
+        # "$mod, H, exec, alacritty"
         "$mod, F, fullscreen"
         "$mod SHIFT, F, togglefloating"
 
-        # Applications: foot
+        # Applications:
         # workspace: mod arst, neio (colemak mdh home row)
         # movetoworkspace: +shift
         # specialworkspace: mod x, move to with shift
