@@ -59,7 +59,7 @@
         {
           key = "Space";
           mods = "Control";
-          chars = "\u0000";
+          chars = "\u0000"; # FIX: Currently just pastes this code into the terminal. This worked in the past when ssh'd into jazzserver from wsl within alacritty.
         }
         {
           key = "V";
