@@ -43,6 +43,7 @@
     nmap
     steam-run
     pay-respects
+    attic-client
   ]) ++ [
     inputs.claude-code.packages.${pkgs.system}.default
     inputs.fenix.packages.${pkgs.system}.latest.toolchain
