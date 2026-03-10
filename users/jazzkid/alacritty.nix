@@ -20,10 +20,6 @@
 
       window = {
         opacity = 1.0;
-        padding = {
-          x = 8;
-          y = 8;
-        };
       };
 
       colors = {
