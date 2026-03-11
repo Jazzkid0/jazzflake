@@ -12,4 +12,5 @@ in
   "qbittorrent_conf.age".publicKeys = keys;
   "attic-environment-file.age".publicKeys = keys;
   "attic-signing-key.age".publicKeys = keys;
+  "attic-token.age".publicKeys = keys;
 }
