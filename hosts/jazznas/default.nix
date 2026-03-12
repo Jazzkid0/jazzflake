@@ -20,6 +20,7 @@
     ../../modules/services/jellyseerr.nix
     ../../modules/services/silverbullet.nix
     ../../modules/services/attic.nix
+    ../../modules/services/cache-builder.nix
   ];
 
   age.identityPaths = [ "/home/jazzkid/.ssh/id_ed25519" ];

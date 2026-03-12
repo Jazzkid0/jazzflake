@@ -5,6 +5,7 @@ let
   repoPath = "/var/lib/package-attic";
   gitName = "jazzkid";
   gitEmail = "jazzkid@jazzkid.xyz";
+  home = "/home/jazzkid";
 in
 {
   age.secrets.attic-token = {
@@ -30,39 +31,43 @@ in
     script = ''
       set -euo pipefail
 
-      export HOME="/home/jazzkid"
+      export HOME="${home}"
       export GIT_AUTHOR_NAME="${gitName}"
       export GIT_AUTHOR_EMAIL="${gitEmail}"
       export GIT_COMMITTER_NAME="${gitName}"
       export GIT_COMMITTER_EMAIL="${gitEmail}"
 
-      if [ ! -d "${repoPath}/.git" ];
+      if [ ! -d "${repoPath}/.git" ]; then
         echo "Cloning packages repo..."
-        ${pkgs.git}/bin/git clone ${repoUrl} ${repoPath}
+        ${pkgs.jujutsu}/bin/jj git clone ${repoUrl} ${repoPath};
       fi
 
       cd ${repoPath}
 
       // reset to main
-      ${pkgs.git}/bin/git fetch origin
+      ${pkgs.jujutsu}/bin/jj git fetch origin
       ${pkgs.git}/bin/git checkout -B built origin/main
 
-      // update packages and build
+      // update packages
       ${pkgs.nix}/bin/nix flake update
 
-      PACKAGES=$(${pkgs.nix}/bin/nix build \
-        --no-link \
-        --print-out-paths \
-        $(${pkgs.nix}/bin/nix eval --json .#packages.x86_64-linux \
-          | ${pkgs.jq}/bin/jq -r 'keys[] | ".#packages.x86_64-linux.\(.)"' \
-        )
+      // commit for clean state
+      ${pkgs.jujutsu}/bin/jj commit -m"auto: flake update $(date -u +%Y-%m-%d)"
+
+      OUTPUTS=$(${pkgs.nix}/bin/nix flake show --json \
+        | ${pkgs.jq}/bin/jq -r '".#\(.[][] | keys[])^*"'
+      )
+
+      PACKAGES=$(echo "$OUTPUTS" \
+        | xargs ${pkgs.nix}/bin/nix build \
+          --no-link \
+          --print-out-paths \
       )
 
       echo "$PACKAGES" | xargs ${pkgs.attic-client}/bin/attic push main
 
       // commit and push
-      ${pkgs.git}/bin/git add flake.lock
-      ${pkgs.git}/bin/git commit -m"auto: update flake.lock $(date -u +%Y-%m-%d)"
+      ${pkgs.jujutsu}/bin/jj commit -m"auto: build packages $(date -u +%Y-%m-%d)"
       ${pkgs.git}/bin/git push --force-with-lease origin built
 
       echo "packages updated successfully"
