@@ -16,14 +16,6 @@
             url = "github:ryantm/agenix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        claude-code = {
-            url = "github:sadjow/claude-code-nix";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-        fenix = {
-            url = "github:nix-community/fenix";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
         nixarr = {
             url = "github:rasmus-kirk/nixarr";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -34,7 +26,7 @@
         };
     };
 
-    outputs = { self, nixpkgs, deploy-rs, home-manager, agenix, nixarr, fenix, nixos-hardware, ... }@inputs:
+    outputs = { self, nixpkgs, deploy-rs, home-manager, agenix, nixarr, nixos-hardware, ... }@inputs:
         let
             mkSystem = { hostname, user, gui, modules }: nixpkgs.lib.nixosSystem {
                 specialArgs = { inherit inputs self agenix nixarr nixos-hardware gui; };

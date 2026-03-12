@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   home.packages = (with pkgs; [
     vim
@@ -47,7 +47,6 @@
     jq
     age
   ]) ++ [
-    inputs.claude-code.packages.${pkgs.system}.default
-    inputs.fenix.packages.${pkgs.system}.latest.toolchain
+    # packages from local binary cache
   ];
 }
