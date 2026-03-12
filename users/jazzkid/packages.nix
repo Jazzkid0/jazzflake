@@ -45,6 +45,7 @@
     pay-respects
     attic-client
     jq
+    age
   ]) ++ [
     inputs.claude-code.packages.${pkgs.system}.default
     inputs.fenix.packages.${pkgs.system}.latest.toolchain
