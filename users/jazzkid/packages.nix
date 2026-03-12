@@ -6,7 +6,7 @@
     curl
     git
     tree
-    neofetch
+    fastfetch
     gcc
     cmake
     gnumake
