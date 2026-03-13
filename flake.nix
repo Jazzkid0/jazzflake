@@ -28,8 +28,8 @@
 
     outputs = { self, nixpkgs, deploy-rs, home-manager, agenix, nixarr, nixos-hardware, ... }@inputs:
         let
-            mkSystem = { hostname, user, gui, modules }: nixpkgs.lib.nixosSystem {
-                specialArgs = { inherit inputs self agenix nixarr nixos-hardware gui; };
+            mkSystem = { hostname, user, gui ? false, unfree-whitelist ? false, modules }: nixpkgs.lib.nixosSystem {
+                specialArgs = { inherit inputs self agenix nixarr nixos-hardware gui unfree-whitelist; };
                 modules = [
                     ./hosts/${hostname}/default.nix
                     ./modules/common/common.nix
@@ -49,6 +49,7 @@
                     hostname = "jazzpc";
                     user = "jazzkid";
                     gui = true;
+                    unfree-whitelist = true;
                     modules = [
                     ];
                 };
@@ -56,7 +57,6 @@
                 jazznas = mkSystem {
                     hostname = "jazznas";
                     user = "jazzkid";
-                    gui = false;
                     modules = [
                         nixarr.nixosModules.default
                         # NAS-specific service modules will be added in default.nix
@@ -66,7 +66,6 @@
                 jazzserver = mkSystem {
                     hostname = "jazzserver";
                     user = "jazzkid";
-                    gui = false;
                     modules = [
                         ./modules/server/server.nix
                     ];

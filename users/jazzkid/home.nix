@@ -1,4 +1,4 @@
-{ config, lib, gui ? false, ... }:
+{ config, lib, gui, ... }:
 
 {
    imports = [

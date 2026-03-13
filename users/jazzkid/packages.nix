@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = (with pkgs; [
     vim
@@ -46,6 +46,8 @@
     attic-client
     jq
     age
+  ]) ++ (with pkgs; [ ## UNFREE PACKAGES ----- see ./modules/common/unfree-whitelist.nix
+    # packages that need allow-unfree to run
   ]) ++ [
     # packages from local binary cache
   ];
