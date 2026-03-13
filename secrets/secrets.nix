@@ -13,4 +13,5 @@ in
   "attic-environment-file.age".publicKeys = keys;
   "attic-signing-key.age".publicKeys = keys;
   "attic-token.age".publicKeys = keys;
+  "nix-netrc.age".publicKeys = keys;
 }
