@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, jazzpkgs, ... }:
 {
   home.packages = (with pkgs; [
     vim
@@ -47,8 +47,7 @@
     jq
     age
   ]) ++ (with pkgs; [ ## UNFREE PACKAGES ----- see ./modules/common/unfree-whitelist.nix
-    # packages that need allow-unfree to run
-  ]) ++ [
-    # packages from local binary cache
-  ];
+  ]) ++ ( with pkgs; [ ## JAZZPKGS
+    opencode
+  ]);
 }
