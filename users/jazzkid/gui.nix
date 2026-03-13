@@ -8,12 +8,13 @@
       ./alacritty.nix
       # ./ghostty.nix
 
+      ./wofi.nix # launcher
+      ./clipboard.nix
+
       # not familiar with common programs, but these have been recommended to me
       # ./hyprpaper.nix # wallpapers
-      ./wofi.nix # launcher
       # ./yazi.nix # file manager (terminal based?)
       # polkid-kde-agent or lxqt-policykit # allow gui apps to request elevated permissions
-      # cliphist + wl-clipboard # clipboard
       # (check pipewire + wireplumber) # haven't tested audio yet
       # ./grimblast.nix # screenshots
       # ./mako.nix # notifs

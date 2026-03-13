@@ -61,6 +61,8 @@
         "$mod, D, exec, wofi"
         "$mod, H, exec, alacritty"
 
+        "$mod, V, exec, cliphist list | wofi --dmenu | cliphist decode"
+        "$mod SHIFT, V, exec, cliphist store"
         # Window management
         "$mod, F, fullscreen"
         "$mod SHIFT, F, togglefloating"
