@@ -57,12 +57,18 @@
         "$mod, K, killactive"
         "$mod CONTROL, K, forcekillactive"
 
+        ## PROGRAMS $$
+
         # Launcher / Terminal
         "$mod, D, exec, wofi"
         "$mod, H, exec, alacritty"
 
         "$mod, V, exec, cliphist list | wofi --dmenu | cliphist decode"
         "$mod SHIFT, V, exec, cliphist store"
+
+
+        ## NAVIGATION ##
+
         # Window management
         "$mod, F, fullscreen"
         "$mod SHIFT, F, togglefloating"
@@ -88,14 +94,18 @@
         "$mod SHIFT, O, movetoworkspace, 8"
 
         # Move focus (direction - hjkl / arrows)
-        "$mod, H, movefocus, l"
-        "$mod, J, movefocus, d"
-        "$mod, K, movefocus, u"
-        "$mod, L, movefocus, r"
+        "$mod CONTROL, H, movefocus, l"
+        "$mod CONTROL, J, movefocus, d"
+        "$mod CONTROL, K, movefocus, u"
+        "$mod CONTROL, L, movefocus, r"
         "$mod, Left, movefocus, l"
         "$mod, Right, movefocus, r"
         "$mod, Up, movefocus, u"
         "$mod, Down, movefocus, d"
+        "$mod CONTROL, Left, movefocus, l"
+        "$mod CONTROL, Right, movefocus, r"
+        "$mod CONTROL, Up, movefocus, u"
+        "$mod CONTROL, Down, movefocus, d"
 
         # Move window (direction - hjkl / arrows)
         "$mod SHIFT, H, movewindow, l"
@@ -109,12 +119,6 @@
 
         # Special workspace (scratchpad)
         "$mod, X, togglespecialworkspace, magic"
-
-        # Mouse emulation (alt + hjkl to move focus)
-        "$mod, Alt, movefocus, l"
-        "$mod, Alt, movefocus, d"
-        "$mod, Alt, movefocus, u"
-        "$mod, Alt, movefocus, r"
 
         # Scroll through workspaces
         "$mod, mouse_down, workspace, e+1"
