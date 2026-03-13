@@ -9,7 +9,7 @@
     ../../modules/services/nixarr.nix
     ../../modules/services/nginx.nix
     ../../modules/services/transmission.nix
-    ../../modules/services/qbittorrent.nix
+    # ../../modules/services/qbittorrent.nix
     ../../modules/services/jellyfin.nix
     ../../modules/services/prowlarr.nix
     ../../modules/services/radarr.nix
