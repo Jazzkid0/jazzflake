@@ -2,7 +2,7 @@
 {
   nix.settings = {
     substituters= [
-      "https://cachix.jazzkid.xyz"
+      "https://cachix.jazzkid.xyz/main"
     ];
     trusted-public-keys = [ "cachix.jazzkid.xyz:74drntauc/Zv2ihaTqSMYiGE7Rcdt481S6Q0phHDU3c=" ];
   };
