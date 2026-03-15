@@ -3,6 +3,7 @@
   imports =
     [ 
       ./hardware-configuration.nix
+      ./hardware/mounts.nix
     ];
 
   age.identityPaths = [ "/home/jazzkid/.ssh/id_ed25519" ];
