@@ -121,10 +121,6 @@
         # Special workspace (scratchpad)
         "$mod, X, togglespecialworkspace, magic"
 
-        # Scroll through workspaces
-        "$mod, mouse_down, workspace, e+1"
-        "$mod, mouse_up, workspace, e-1"
-
         # Media keys (XF86 codes - universal)
         ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
