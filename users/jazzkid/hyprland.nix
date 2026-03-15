@@ -1,5 +1,4 @@
-{ lib, pkgs, ... }:
-
+{ ... }:
 {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -7,13 +6,14 @@
     systemd.enable = true;
 
     settings = {
-      "$mod" = "SUPER";
-      
       # TODO: monitor settings
       #monitor = ",preferred,auto,1"
 
       exec-once = [
         "waybar"
+        "wl-paste --type text --watch cliphist store" # Stores only text data
+        "wl-paste --type image --watch cliphist store" # Stores only image data
+
       ];
 
       general = {
@@ -54,73 +54,75 @@
       # FORMAT: "Mods, key, dispatcher, params"
       bind = [
         # Exit / Kill
-        "$mod SHIFT, K, exit"
-        "$mod, K, killactive"
-        "$mod CONTROL, K, forcekillactive"
+        "SUPER SHIFT, K, exit"
+        "SUPER, K, killactive"
+        "SUPER CONTROL, K, forcekillactive"
 
         ## PROGRAMS $$
 
         # Launcher / Terminal
-        "$mod, D, exec, wofi"
-        "$mod, H, exec, alacritty"
+        "SUPER, D, exec, wofi --show drun"
+        "SUPER SHIFT, D, exec, wofi --show run"
+        "SUPER, H, exec, alacritty"
 
-        "$mod, V, exec, cliphist list | wofi --dmenu | cliphist decode"
-        "$mod SHIFT, V, exec, cliphist store"
+        "SUPER, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
+        "SUPER, V, exec, cliphist list | wofi --dmenu --pre-display-cmd \"echo '%s' | cut -f 2\" | cliphist decode | wl-copy"
+        "SUPER SHIFT, V, exec, cliphist store"
 
 
         ## NAVIGATION ##
 
         # Window management
-        "$mod, F, fullscreen"
-        "$mod ALT, F, fullscreen, 1"
-        "$mod SHIFT, F, togglefloating"
+        "SUPER, F, fullscreen"
+        "SUPER ALT, F, fullscreen" # TODO: Maximise window?
+        "SUPER SHIFT, F, togglefloating"
 
         # Workspace navigation (Colemak: arst = 1-4, neio = 5-9)
-        "$mod, A, workspace, 1"
-        "$mod, R, workspace, 2"
-        "$mod, S, workspace, 3"
-        "$mod, T, workspace, 4"
-        "$mod, N, workspace, 5"
-        "$mod, E, workspace, 6"
-        "$mod, I, workspace, 7"
-        "$mod, O, workspace, 8"
+        "SUPER, A, workspace, 1"
+        "SUPER, R, workspace, 2"
+        "SUPER, S, workspace, 3"
+        "SUPER, T, workspace, 4"
+        "SUPER, N, workspace, 5"
+        "SUPER, E, workspace, 6"
+        "SUPER, I, workspace, 7"
+        "SUPER, O, workspace, 8"
 
         # Move window to workspace (Colemak)
-        "$mod SHIFT, A, movetoworkspace, 1"
-        "$mod SHIFT, R, movetoworkspace, 2"
-        "$mod SHIFT, S, movetoworkspace, 3"
-        "$mod SHIFT, T, movetoworkspace, 4"
-        "$mod SHIFT, N, movetoworkspace, 5"
-        "$mod SHIFT, E, movetoworkspace, 6"
-        "$mod SHIFT, I, movetoworkspace, 7"
-        "$mod SHIFT, O, movetoworkspace, 8"
+        "SUPER SHIFT, A, movetoworkspace, 1"
+        "SUPER SHIFT, R, movetoworkspace, 2"
+        "SUPER SHIFT, S, movetoworkspace, 3"
+        "SUPER SHIFT, T, movetoworkspace, 4"
+        "SUPER SHIFT, N, movetoworkspace, 5"
+        "SUPER SHIFT, E, movetoworkspace, 6"
+        "SUPER SHIFT, I, movetoworkspace, 7"
+        "SUPER SHIFT, O, movetoworkspace, 8"
 
         # Move focus (direction - hjkl / arrows)
-        "$mod CONTROL, H, movefocus, l"
-        "$mod CONTROL, J, movefocus, d"
-        "$mod CONTROL, K, movefocus, u"
-        "$mod CONTROL, L, movefocus, r"
-        "$mod, Left, movefocus, l"
-        "$mod, Right, movefocus, r"
-        "$mod, Up, movefocus, u"
-        "$mod, Down, movefocus, d"
-        "$mod CONTROL, Left, movefocus, l"
-        "$mod CONTROL, Right, movefocus, r"
-        "$mod CONTROL, Up, movefocus, u"
-        "$mod CONTROL, Down, movefocus, d"
+        "SUPER CONTROL, H, movefocus, l"
+        "SUPER CONTROL, J, movefocus, d"
+        "SUPER CONTROL, K, movefocus, u"
+        "SUPER CONTROL, L, movefocus, r"
+        "SUPER, Left, movefocus, l"
+        "SUPER, Right, movefocus, r"
+        "SUPER, Up, movefocus, u"
+        "SUPER, Down, movefocus, d"
+        "SUPER CONTROL, Left, movefocus, l"
+        "SUPER CONTROL, Right, movefocus, r"
+        "SUPER CONTROL, Up, movefocus, u"
+        "SUPER CONTROL, Down, movefocus, d"
 
         # Move window (direction - hjkl / arrows)
-        "$mod SHIFT, H, movewindow, l"
-        "$mod SHIFT, J, movewindow, d"
-        "$mod SHIFT, K, movewindow, u"
-        "$mod SHIFT, L, movewindow, r"
-        "$mod SHIFT, Left, movewindow, l"
-        "$mod SHIFT, Right, movewindow, r"
-        "$mod SHIFT, Up, movewindow, u"
-        "$mod SHIFT, Down, movewindow, d"
+        "SUPER SHIFT, H, movewindow, l"
+        "SUPER SHIFT, J, movewindow, d"
+        "SUPER SHIFT, K, movewindow, u"
+        "SUPER SHIFT, L, movewindow, r"
+        "SUPER SHIFT, Left, movewindow, l"
+        "SUPER SHIFT, Right, movewindow, r"
+        "SUPER SHIFT, Up, movewindow, u"
+        "SUPER SHIFT, Down, movewindow, d"
 
         # Special workspace (scratchpad)
-        "$mod, X, togglespecialworkspace, magic"
+        "SUPER, X, togglespecialworkspace, magic"
 
         # Media keys (XF86 codes - universal)
         ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
@@ -136,9 +138,9 @@
 
       # Mouse bindings
       bindm = [
-        "$mod, mouse:272, movewindow"
-        "$mod, mouse:273, resizewindow"
-        "$mod, mouse:274, fullscreen, 1"
+        "SUPER, mouse:272, movewindow"
+        "SUPER, mouse:273, resizewindow"
+        "SUPER, mouse:274, fullscreen"
       ];
 
       # Window rules
