@@ -71,6 +71,7 @@
 
         # Window management
         "$mod, F, fullscreen"
+        "$mod ALT, F, fullscreen, 1"
         "$mod SHIFT, F, togglefloating"
 
         # Workspace navigation (Colemak: arst = 1-4, neio = 5-9)
@@ -140,6 +141,7 @@
       bindm = [
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resizewindow"
+        "$mod, mouse:274, fullscreen, 1"
       ];
 
       # Window rules
