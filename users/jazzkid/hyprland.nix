@@ -13,6 +13,7 @@
       #monitor = ",preferred,auto,1"
 
       exec-once = [
+        "waybar"
       ];
 
       general = {

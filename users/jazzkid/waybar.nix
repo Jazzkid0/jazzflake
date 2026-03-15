@@ -6,11 +6,11 @@
     settings = {
       mainBar = {
         layer = "top";
-        position = "top";
+        position = "bottom";
         height = 30;
-        modules-left = [ "hyprland/workspaces" "hyprland/window" ];
-        modules-center = [ "clock" ];
-        modules-right = [ "pulseaudio" "network" "battery" "tray" ];
+        modules-left = [ "hyprland/workspaces" ];
+        modules-center = [ "hyprland/window" ];
+        modules-right = [ "pulseaudio" "network" "tray" ];
       };
 
       clock = {
@@ -76,8 +76,8 @@
 
     style = ''
       * {
-        font-family: "JetBrainsMono Nerd Font";
-        font-size: 13px;
+        font-family: "RobotoMono Nerd Font";
+        font-size: 14px;
       }
       window#waybar {
         background: rgba(30, 30, 46, 0.9);
