@@ -25,9 +25,23 @@
       extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
     };
 
+    # Audio configuration
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      jack.enable = true;
+    };
+
     environment.systemPackages = with pkgs; [
+      # Gfx tools, maybe remove after testing
       vulkan-tools
       mesa-demos
+      # Audio tools
+      pavucontrol
+      playerctl
     ];
   };
 }

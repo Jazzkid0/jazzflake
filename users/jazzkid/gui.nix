@@ -10,12 +10,14 @@
 
       ./wofi.nix # launcher
       ./clipboard.nix
+      # polkid-kde-agent or lxqt-policykit # allow gui apps to request elevated permissions
 
-      # not familiar with common programs, but these have been recommended to me
+      # some kind of media player
+
+      # slippi melee, deps like dolphin
+
       # ./hyprpaper.nix # wallpapers
       # ./yazi.nix # file manager (terminal based?)
-      # polkid-kde-agent or lxqt-policykit # allow gui apps to request elevated permissions
-      # (check pipewire + wireplumber) # haven't tested audio yet
       # ./grimblast.nix # screenshots
       # ./mako.nix # notifs
 
