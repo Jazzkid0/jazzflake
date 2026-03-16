@@ -28,6 +28,10 @@
       rpc-host-whitelist = "transmission.jazzkid.xyz,localhost,127.0.0.1";
       download-dir = "/srv/media/media-lib/downloads";
       incomplete-dir = "/srv/media/media-lib/downloads/incomplete";
+      speed-limit-down-enabled = true;
+      speed-limit-down = 1000;
+      speed-limit-up-enabled = true;
+      speed-limit-up = 50;
     };
     messageLevel = "debug";
   };
