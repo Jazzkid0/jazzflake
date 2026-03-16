@@ -58,12 +58,12 @@
     '';
   };
 
-  # systemd.timers.silverbullet-sync = {
-  #   wantedBy = [ "timers.target" ];
-  #   timerConfig = {
-  #     OnBootSec = "5min";
-  #     OnUnitActiveSec = "60s";
-  #     Unit = "silverbullet-sync.service";
-  #   };
-  # };
+  systemd.timers.silverbullet-sync = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "5min";
+      OnUnitActiveSec = "60s";
+      Unit = "silverbullet-sync.service";
+    };
+  };
 }
