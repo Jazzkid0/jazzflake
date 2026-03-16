@@ -32,19 +32,28 @@
 
   systemd.services.silverbullet-sync = {
     description = "Silverbullet git sync";
+
     serviceConfig = {
       Type = "oneshot";
       User = "jazzkid";
       WorkingDirectory = "/home/jazzkid/notes";
     };
-    path = [ pkgs.jujutsu pkgs.iproute2 ];
+
+    path = (with pkgs; [
+      jujutsu
+      git
+      openssh
+    ]);
+
     script = ''
-      ss -tn | grep -q ':8073' || exit 0
-      sleep 60
+      set -euo pipefail
+
       if ! [ -z "$(jj diff --summary)" ]; then
-        jj commit -m"auto: $(date +'%F|%T|%A')"
-        jj bookmark move main --to @-
-        jj git push --bookmark main
+        jj bookmark move main
+        jj commit -m"auto: sync"
+        jj git push --bookmark main;
+      else
+        echo "No changes detected."
       fi
     '';
   };
