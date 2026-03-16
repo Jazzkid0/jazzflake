@@ -30,29 +30,42 @@ in
       EnvironmentFile = config.age.secrets.attic-token.path;
     };
 
+    path = (with pkgs; [
+      nix
+      openssh
+      git
+      jujutsu
+      attic-client
+    ]);
+
     script = ''
       set -euo pipefail
 
       if [ ! -d "${repoPath}/.git" ]; then
         echo "Cloning packages repo..."
-        ${pkgs.jujutsu}/bin/jj git clone ${repoUrl} ${repoPath};
+        jj git clone ${repoUrl} ${repoPath}
+        cd ${repoPath}
+        jj git fetch --config user.name=${gitName} --config user.email=${gitEmail}
+        jj new main --config user.name=${gitName} --config user.email=${gitEmail}
+        jj bookmark create jazzpkgs --config user.name=${gitName} --config user.email=${gitEmail}
+      else
+        cd ${repoPath}
+        jj git fetch --config user.name=${gitName} --config user.email=${gitEmail}
+        jj new main --config user.name=${gitName} --config user.email=${gitEmail}
+        jj bookmark set jazzpkgs --config user.name=${gitName} --config user.email=${gitEmail} --allow-backwards
       fi
 
-      cd ${repoPath}
-      ${pkgs.jujutsu}/bin/jj git fetch --config user.name=${gitName} --config user.email=${gitEmail}
-      ${pkgs.jujutsu}/bin/jj new main --config user.name=${gitName} --config user.email=${gitEmail}
-      ${pkgs.jujutsu}/bin/jj branch create jazzpkgs --config user.name=${gitName} --config user.email=${gitEmail}
 
-      ${pkgs.nix}/bin/nix flake update
-      ${pkgs.jujutsu}/bin/jj commit -m"auto: flake update" --config user.name=${gitName} --config user.email=${gitEmail}
+      nix flake update
+      jj commit -m"auto: flake update" --config user.name=${gitName} --config user.email=${gitEmail}
 
-      PACKAGES=$(${pkgs.nix}/bin/nix run .#build-all)
+      PACKAGES=$(nix run .#build-all)
 
-      echo "$PACKAGES" | xargs ${pkgs.nix}/bin/nix store sign --key-file ${config.age.secrets.attic-signing-key.path} --recursive
+      echo "$PACKAGES" | xargs nix store sign --key-file ${config.age.secrets.attic-signing-key.path} --recursive
 
-      echo "$PACKAGES" | xargs ${pkgs.attic-client}/bin/attic push main
+      echo "$PACKAGES" | xargs attic push main
 
-      ${pkgs.jujutsu}/bin/jj git push -b jazzpkgs --config user.name=${gitName} --config user.email=${gitEmail}
+      jj git push -b jazzpkgs --config user.name=${gitName} --config user.email=${gitEmail}
 
       echo "packages updated successfully"
     '';
