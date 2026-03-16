@@ -42,6 +42,7 @@
       # Audio tools
       pavucontrol
       playerctl
+      pulseaudio # provides pactl, paplay etc.
     ];
   };
 }
