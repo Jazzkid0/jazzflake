@@ -26,7 +26,7 @@
         "security" = "user";
         "guest account" = "nobody";
         "map to guest" = "bad user";
-        "hosts allow" = "127.0.0.1 192.168.1. 100.64.0.0/10";
+        "hosts allow" = "127.0.0.1 192.168.1. 100.64.0.0/10 fd7a:115c:a1e0::/48";
         "hosts deny" = "";
       };
 

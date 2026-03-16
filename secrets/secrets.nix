@@ -14,4 +14,5 @@ in
   "attic-signing-key.age".publicKeys = keys;
   "attic-token.age".publicKeys = keys;
   "nix-netrc.age".publicKeys = keys;
+  "samba-creds.age".publicKeys = keys;
 }
