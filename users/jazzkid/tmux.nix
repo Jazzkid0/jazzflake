@@ -20,6 +20,9 @@
       set-option -sa terminal-overrides ",xterm*:Tc"
       set-option -g focus-events on
 
+      # quick commands
+      bind -n M-: command-prompt
+
       # Open panes at current dir
       bind - split-window -v -c "#{pane_current_path}"
       bind _ split-window -h -c "#{pane_current_path}"
@@ -30,6 +33,7 @@
       bind c new-window -c "#{pane_current_path}"
 
       # selection keybinds
+      bind-key -n M-V copy-mode
       bind-key -T copy-mode-vi v send-keys -X begin-selection
       bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
       bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
