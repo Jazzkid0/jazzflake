@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ ... }:
 
 {
   programs.waybar = {
@@ -10,11 +10,11 @@
         height = 30;
         modules-left = [ "hyprland/workspaces" ];
         modules-center = [ "hyprland/window" ];
-        modules-right = [ "pulseaudio" "network" "tray" ];
+        modules-right = [ "pulseaudio" "tray" "network" "clock" ];
       };
 
       clock = {
-        format = "{:%H:%M}";
+        format = "{:%Y-%m-%d | %H:%M}";
         format-alt = "{:%Y-%m-%d}";
         tooltip-format = "{:%Y-%m-%d | %H:%M}";
         interval = 1;
@@ -90,7 +90,12 @@
       #workspaces button.active {
         color: #a6e3a1;
       }
-      #clock, #battery, #network, #pulseaudio {
+      #clock {
+        padding: 0 10px;
+        background: #cdd6f4;
+        color: #32290b;
+      }
+      #battery, #network, #pulseaudio {
         padding: 0 10px;
         color: #cdd6f4;
       }
