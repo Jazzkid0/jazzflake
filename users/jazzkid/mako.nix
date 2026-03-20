@@ -18,6 +18,12 @@
       border-radius = 8;
       border-size = 2;
       progress-color = "over #89b4fa";
+
+      "mode=do-not-disturb" = {
+        invisible = 1;
+        default-timeout = 0;
+        ignore-timeout = 1;
+      };
     };
   };
 }
