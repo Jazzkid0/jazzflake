@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -10,7 +10,8 @@
       #monitor = ",preferred,auto,1"
 
       exec-once = [
-        "waybar"
+        "${pkgs.waybar}/bin/waybar"
+        "${pkgs.mako}/bin/mako"
         "wl-paste --type text --watch cliphist store" # Stores only text data
         "wl-paste --type image --watch cliphist store" # Stores only image data
 
