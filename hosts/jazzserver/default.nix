@@ -5,6 +5,8 @@
       ./hardware-configuration.nix
     ];
 
+  age.identityPaths = [ "/home/jazzkid/.ssh/id_ed25519" ];
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
