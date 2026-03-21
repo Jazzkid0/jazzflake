@@ -70,6 +70,7 @@
         "SUPER, V, exec, cliphist list | wofi --dmenu --pre-display-cmd \"echo '%s' | cut -f 2\" | cliphist decode | wl-copy"
         "SUPER SHIFT, V, exec, cliphist store"
 
+        "SUPER, Q, exec, ${pkgs.mako}/bin/makoctl mode -t do-not-disturb && ${pkgs.mako}/bin/makoctl reload && ${pkgs.procps}/bin/pkill -RTMIN+1 waybar"
 
         ## NAVIGATION ##
 

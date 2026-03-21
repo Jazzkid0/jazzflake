@@ -1,5 +1,13 @@
-{ ... }:
-
+{ pkgs, ... }:
+let
+  makoWaybarScript = pkgs.writeShellScript "mako-dnd" ''
+    if ${pkgs.mako}/bin/makoctl mode | grep -q "do-not-disturb"; then
+      echo '{"text": "󰂛", "tooltip": "Do not disturb", "class": "dnd"}'
+    else
+      echo '{"text": "󰂚", "tooltip": "Notifications on", "class": "active"}'
+    fi
+  '';
+in
 {
   programs.waybar = {
     enable = true;
@@ -10,7 +18,7 @@
         height = 30;
         modules-left = [ "hyprland/workspaces" ];
         modules-center = [ "hyprland/window" ];
-        modules-right = [ "pulseaudio" "tray" "network" "clock" ];
+        modules-right = [ "custom/mako-dnd" "pulseaudio" "tray" "network" "clock" ];
       };
 
       clock = {
@@ -71,6 +79,14 @@
         persistent-workspaces = {
           "*" = [ ];
         };
+      };
+      "custom/mako-dnd" = {
+        exec = "${makoWaybarScript}";
+        return-type = "json";
+        interval = "once";
+        signal = 1;
+        on-click = "${pkgs.mako}/bin/makoctl mode -t do-not-disturb && ${pkgs.mako}/bin/makoctl reload && ${pkgs.procps}/bin/pkill -RTMIN+1 waybar";
+        exec-if = "${pkgs.mako}/bin/makoctl --version";
       };
     };
 
