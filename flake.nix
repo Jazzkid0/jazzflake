@@ -28,8 +28,8 @@
 
     outputs = { self, nixpkgs, deploy-rs, home-manager, agenix, nixarr, nixos-hardware, ... }@inputs:
         let
-            mkSystem = { hostname, user, gui ? false, unfree-whitelist ? false, modules }: nixpkgs.lib.nixosSystem {
-                specialArgs = { inherit inputs self agenix nixarr nixos-hardware gui unfree-whitelist; };
+            mkSystem = { hostname, user, domain, gui ? false, unfree-whitelist ? false, modules }: nixpkgs.lib.nixosSystem {
+                specialArgs = { inherit inputs self agenix nixarr nixos-hardware gui unfree-whitelist domain; };
                 modules = [
                     ./hosts/${hostname}/default.nix
                     ./modules/common/common.nix
@@ -48,6 +48,7 @@
                 jazzpc = mkSystem {
                     hostname = "jazzpc";
                     user = "jazzkid";
+                    domain = "pc.jazzkid.xyz";
                     gui = true;
                     unfree-whitelist = true;
                     modules = [
@@ -57,15 +58,17 @@
                 jazznas = mkSystem {
                     hostname = "jazznas";
                     user = "jazzkid";
+                    domain = "nas.jazzkid.xyz";
                     modules = [
                         nixarr.nixosModules.default
-                        # NAS-specific service modules will be added in default.nix
+                        ./modules/server/server.nix
                     ];
                 };
 
                 jazzserver = mkSystem {
                     hostname = "jazzserver";
                     user = "jazzkid";
+                    domain = "dev.jazzkid.xyz";
                     modules = [
                         ./modules/server/server.nix
                     ];
@@ -75,6 +78,12 @@
                 sshUser = "root";
                 user = "root";
                 nodes = {
+                    jazzpc = {
+                        hostname = "pc.jazzkid.xyz";
+                        profiles.system = {
+                            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.jazzpc;
+                        };
+                    };
                     jazzserver = {
                         hostname = "dev.jazzkid.xyz";
                         profiles.system = {
@@ -88,7 +97,6 @@
                             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.jazznas;
                         };
                     };
-
                 };
             };
             checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;

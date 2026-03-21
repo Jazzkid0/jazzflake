@@ -26,16 +26,6 @@
   };
 
   nix.settings.trusted-users = ["jazzkid"];
-  services.nginx.virtualHosts."dev.jazzkid.xyz" = {
-    # TODO: Fix certs
-    # forceSSL = true;
-    # enableACME = true;
-    # acmeRoot = null;
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:8080";
-      proxyWebsockets = true;
-    };
-  };
 
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOXr41H8R6YjEFGilGFw3k+KmuPyDaOofxctpQMmY18f jazzkid@jazzsl"

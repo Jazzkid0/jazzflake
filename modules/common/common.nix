@@ -3,6 +3,7 @@
   imports = [
     ./networking.nix
     ./security.nix
+    ./nginx.nix
    ]
    ++ lib.optionals gui [ ./gui.nix ]
    ++ lib.optionals unfree-whitelist [ ./unfree-whitelist.nix ]
