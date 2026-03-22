@@ -62,6 +62,20 @@
                     modules = [
                         nixarr.nixosModules.default
                         ./modules/server/server.nix
+                        ./modules/services/samba.nix
+                        ./modules/services/nixarr.nix
+                        ./modules/services/transmission.nix
+                        ./modules/services/jellyfin.nix
+                        ./modules/services/prowlarr.nix
+                        ./modules/services/radarr.nix
+                        ./modules/services/sonarr.nix
+                        ./modules/services/lidarr.nix
+                        ./modules/services/readarr.nix
+                        ./modules/services/bazarr.nix
+                        ./modules/services/jellyseerr.nix
+                        ./modules/services/silverbullet.nix
+                        ./modules/services/attic.nix
+                        ./modules/services/cache-builder.nix
                     ];
                 };
 
@@ -73,6 +87,7 @@
                         ./modules/server/server.nix
                     ];
                 };
+
             };
             deploy = {
                 sshUser = "root";
