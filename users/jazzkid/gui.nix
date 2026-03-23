@@ -1,23 +1,18 @@
 {
-  config,
-  lib,
+  pkgs,
   ...
 }: {
   imports = [
     ./fonts.nix
     ./hyprland.nix
     ./waybar.nix
-    # still deciding on a terminal, install both for now
     ./alacritty.nix
-    # ./ghostty.nix
 
     ./wofi.nix # launcher
     ./clipboard.nix
     # polkid-kde-agent or lxqt-policykit # allow gui apps to request elevated permissions
 
-    # some kind of media player
-
-    # slippi melee, deps like dolphin
+    # ./slippi-launcher.nix (cache may have to handle this)
 
     # ./hyprpaper.nix # wallpapers
     # ./yazi.nix # file manager (terminal based?)
@@ -29,4 +24,10 @@
   ];
 
   gtk.enable = true;
+
+  home.packages = with pkgs; [
+    feishin
+    spotify
+    obs-studio
+  ];
 }
