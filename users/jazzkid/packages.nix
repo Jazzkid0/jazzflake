@@ -23,7 +23,7 @@
       inotify-tools
       flyctl
       fd
-      marksman
+      markdown-oxide
       vimPlugins.rustaceanvim
       openssl
       lua-language-server
