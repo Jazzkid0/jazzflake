@@ -1,8 +1,12 @@
-{ config, pkgs, lib, nixarr, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  nixarr,
+  ...
+}: {
   users.users.lidarr = {
-    extraGroups = [ "media" ];
+    extraGroups = ["media"];
   };
 
   users.groups.lidarr = {};

@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   services.cliphist = {
     enable = true;
   };

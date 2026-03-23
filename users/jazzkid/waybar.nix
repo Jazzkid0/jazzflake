@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   makoWaybarScript = pkgs.writeShellScript "mako-dnd" ''
     if ${pkgs.mako}/bin/makoctl mode | grep -q "do-not-disturb"; then
       echo '{"text": "󰂛", "tooltip": "Do not disturb", "class": "dnd"}'
@@ -7,8 +6,7 @@ let
       echo '{"text": "󰂚", "tooltip": "Notifications on", "class": "active"}'
     fi
   '';
-in
-{
+in {
   programs.waybar = {
     enable = true;
     settings = {
@@ -16,9 +14,9 @@ in
         layer = "top";
         position = "bottom";
         height = 30;
-        modules-left = [ "hyprland/workspaces" ];
-        modules-center = [ "hyprland/window" ];
-        modules-right = [ "custom/mako-dnd" "pulseaudio" "tray" "network" "clock" ];
+        modules-left = ["hyprland/workspaces"];
+        modules-center = ["hyprland/window"];
+        modules-right = ["custom/mako-dnd" "pulseaudio" "tray" "network" "clock"];
       };
 
       clock = {
@@ -34,7 +32,7 @@ in
           critical = 15;
         };
         format = "{icon} {capacity}%";
-        format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+        format-icons = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
         format-charging = " {capacity}%";
         format-plugged = " {capacity}%";
         format-alt = "{icon} {time}";
@@ -54,7 +52,7 @@ in
         format = "{icon} {volume}%";
         format-muted = "󰝟";
         format-icons = {
-          default = [ "󰕿" "󰖀" "󰕾" ];
+          default = ["󰕿" "󰖀" "󰕾"];
         };
         on-click = "pavucontrol";
         tooltip-format = "{desc}, {volume}%";
@@ -77,7 +75,7 @@ in
           "10" = "十";
         };
         persistent-workspaces = {
-          "*" = [ ];
+          "*" = [];
         };
       };
       "custom/mako-dnd" = {

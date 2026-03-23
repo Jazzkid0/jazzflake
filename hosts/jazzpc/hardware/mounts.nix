@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   age.secrets.samba-creds = {
     file = ../../../secrets/samba-creds.age;
     owner = "jazzkid";

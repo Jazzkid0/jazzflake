@@ -1,11 +1,9 @@
-{ pkgs, ... }:
-{
-  imports =
-    [ 
-      ./hardware-configuration.nix
-    ];
+{pkgs, ...}: {
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
-  age.identityPaths = [ "/home/jazzkid/.ssh/id_ed25519" ];
+  age.identityPaths = ["/home/jazzkid/.ssh/id_ed25519"];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -15,7 +13,7 @@
 
   users.users.jazzkid = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOXr41H8R6YjEFGilGFw3k+KmuPyDaOofxctpQMmY18f jazzkid@jazzsl"
@@ -35,7 +33,6 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIbpMhMLZqxJXZxKF8PsNtjV69h2HbRwA4HFRAURqjB4 jazzkid@jazznas"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDIN3rt+uOSH4HrmG/LiNb3r7rCBX3j5PGoy3MROYOjZ jazzkid@jazzpc"
   ];
-
 
   # DO NOT CHANGE --------------
   system.stateVersion = "24.05";

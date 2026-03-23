@@ -1,6 +1,8 @@
-{ config, domain, ... }:
-
 {
+  config,
+  domain,
+  ...
+}: {
   users.groups.nginx = {};
   users.users.nginx = {
     isSystemUser = true;
@@ -20,7 +22,7 @@
       email = "jonathan@jknightdev.co.uk";
       dnsProvider = "cloudflare";
       dnsResolver = "1.1.1.1:53,8.8.8.8:53,9.9.9.9:53";
-      extraLegoFlags = [ "--dns.propagation-wait" "5m0s" ];
+      extraLegoFlags = ["--dns.propagation-wait" "5m0s"];
       credentialFiles = {
         "CF_DNS_API_TOKEN_FILE" = config.age.secrets.cloudflare_apiTokenFile.path;
         "CF_ZONE_API_TOKEN_FILE" = config.age.secrets.cloudflare_apiTokenFile.path;
@@ -49,6 +51,6 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
-  networking.firewall.allowedUDPPorts = [ 443 ];
+  networking.firewall.allowedTCPPorts = [80 443];
+  networking.firewall.allowedUDPPorts = [443];
 }

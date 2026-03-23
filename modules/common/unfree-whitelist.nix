@@ -1,5 +1,5 @@
-{ lib, ... }:
-{
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-  ];
+{lib, ...}: {
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+    ];
 }

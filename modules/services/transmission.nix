@@ -1,11 +1,13 @@
-{ config, pkgs, lib, nixarr, ... }:
-
 {
+  config,
+  lib,
+  ...
+}: {
   users.users.transmission = {
     isSystemUser = true;
     group = "media";
     home = lib.mkForce "/var/lib/transmission";
-    extraGroups = [ "media" "smb" ];
+    extraGroups = ["media" "smb"];
     createHome = true;
   };
 
@@ -20,7 +22,7 @@
     enable = true;
     openFirewall = true;
     credentialsFile = config.age.secrets.transmission_credentialsFile.path;
-    extraAllowedIps = [ "192.168.1.*" "192.168.1.99" "100.64.0.0/10" ];
+    extraAllowedIps = ["192.168.1.*" "192.168.1.99" "100.64.0.0/10"];
     extraSettings = {
       rpc-username = "jazzkid";
       rpc-whitelist-enabled = false;
@@ -49,6 +51,6 @@
   };
 
   # Tailscale access for torrent peers
-  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 50000 ];
-  networking.firewall.interfaces.tailscale0.allowedUDPPorts = [ 50000 ];
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [50000];
+  networking.firewall.interfaces.tailscale0.allowedUDPPorts = [50000];
 }

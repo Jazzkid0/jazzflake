@@ -1,12 +1,13 @@
-{ config, pkgs, ... }:
-
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   gitName = "jazzkid";
   gitEmail = "jazzkid@jazzkid.xyz";
   repoUrl = "github_jazzkid:Jazzkid0/package-attic.git";
   repoPath = "/var/lib/package-attic";
-in
-{
+in {
   age.secrets.attic-token = {
     file = ../../secrets/attic-token.age;
     owner = "jazzkid";
@@ -21,8 +22,8 @@ in
 
   systemd.services.attic-push = {
     description = "Build and push packages to the attic cache";
-    wants = [ "network-online.target" "atticd.service" ];
-    after = [ "network-online.target" "atticd.service" ];
+    wants = ["network-online.target" "atticd.service"];
+    after = ["network-online.target" "atticd.service"];
 
     serviceConfig = {
       Type = "oneshot";
@@ -30,13 +31,13 @@ in
       EnvironmentFile = config.age.secrets.attic-token.path;
     };
 
-    path = (with pkgs; [
+    path = with pkgs; [
       nix
       openssh
       git
       jujutsu
       attic-client
-    ]);
+    ];
 
     script = ''
       set -euo pipefail

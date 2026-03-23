@@ -1,8 +1,12 @@
-{ config, pkgs, lib, nixarr, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  nixarr,
+  ...
+}: {
   users.users.bazarr = {
-    extraGroups = [ "media" ];
+    extraGroups = ["media"];
   };
 
   users.groups.bazarr = {};

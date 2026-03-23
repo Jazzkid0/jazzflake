@@ -1,11 +1,15 @@
-{ config, pkgs, lib, nixarr, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  nixarr,
+  ...
+}: {
   users.users.jellyfin = {
     isSystemUser = true;
     group = "media";
     home = "/var/lib/jellyfin";
-    extraGroups = [ "jellyfin" ];
+    extraGroups = ["jellyfin"];
     createHome = true;
   };
 

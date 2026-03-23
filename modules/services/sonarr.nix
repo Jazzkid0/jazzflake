@@ -1,8 +1,6 @@
-{ config, pkgs, lib, nixarr, ... }:
-
-{
+{...}: {
   users.users.sonarr = {
-    extraGroups = [ "media" ];
+    extraGroups = ["media"];
   };
 
   users.groups.sonarr = {};

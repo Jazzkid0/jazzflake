@@ -1,12 +1,14 @@
-{ config, pkgs, ... }:
-
 {
-  environment.systemPackages = [ pkgs.qbittorrent-nox ];
+  config,
+  pkgs,
+  ...
+}: {
+  environment.systemPackages = [pkgs.qbittorrent-nox];
 
   systemd.services.qbittorrent-nox = {
     description = "qbittorrent-nox headless daemon";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
+    wantedBy = ["multi-user.target"];
+    after = ["network.target"];
 
     serviceConfig = {
       ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --confirm-legal-notice --webui-port=8080 --profile=/var/lib/qbittorrent/.config";
@@ -21,7 +23,6 @@
       chown qbittorrent:media /var/lib/qbittorrent/.config/qBittorrent/config/qBittorrent.conf
       chmod 400 /var/lib/qbittorrent/.config/qBittorrent/config/qBittorrent.conf
     '';
-
   };
 
   age.secrets.qbittorrent_conf = {
@@ -38,11 +39,10 @@
     createHome = true;
   };
 
+  networking.firewall.allowedTCPPorts = [8080];
 
-  networking.firewall.allowedTCPPorts = [ 8080 ];
-
-  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 8080 51413 ];
-  networking.firewall.interfaces.tailscale0.allowedUDPPorts = [ 51413 ];
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [8080 51413];
+  networking.firewall.interfaces.tailscale0.allowedUDPPorts = [51413];
 
   services.nginx.virtualHosts."qbittorrent.jazzkid.xyz" = {
     forceSSL = true;

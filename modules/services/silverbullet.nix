@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   services.silverbullet = {
     enable = true;
     spaceDir = "/home/jazzkid/notes";
@@ -10,7 +12,7 @@
     user = "jazzkid";
     group = "media";
   };
-  
+
   age.secrets.silverbullet_credentialsFile = {
     file = ../../secrets/silverbullet_credentialsFile.age;
     owner = "jazzkid";
@@ -18,7 +20,7 @@
     mode = "0400";
   };
 
-  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 8073 ];
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [8073];
 
   services.nginx.virtualHosts."notes.jazzkid.xyz" = {
     forceSSL = true;
@@ -39,11 +41,11 @@
       WorkingDirectory = "/home/jazzkid/notes";
     };
 
-    path = (with pkgs; [
+    path = with pkgs; [
       jujutsu
       git
       openssh
-    ]);
+    ];
 
     script = ''
       set -euo pipefail
@@ -59,7 +61,7 @@
   };
 
   systemd.timers.silverbullet-sync = {
-    wantedBy = [ "timers.target" ];
+    wantedBy = ["timers.target"];
     timerConfig = {
       OnBootSec = "5min";
       OnUnitActiveSec = "60s";

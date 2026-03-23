@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -14,7 +13,6 @@
         "${pkgs.mako}/bin/mako"
         "wl-paste --type text --watch cliphist store" # Stores only text data
         "wl-paste --type image --watch cliphist store" # Stores only image data
-
       ];
 
       general = {
@@ -152,7 +150,6 @@
         "match:title ^(Open File)$, float"
         "match:title ^(Save File)$, float"
       ];
-      
     };
 
     extraConfig = ''

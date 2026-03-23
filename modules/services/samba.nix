@@ -1,14 +1,16 @@
-{ config, pkgs, ... }:
-
 {
-  environment.systemPackages = [ pkgs.samba ];
+  config,
+  pkgs,
+  ...
+}: {
+  environment.systemPackages = [pkgs.samba];
 
   users.groups.smb = {};
 
   users.users.smbuser = {
     isNormalUser = true;
     description = "samba user";
-    extraGroups = [ "smb" ];
+    extraGroups = ["smb"];
     createHome = true;
     # hashedPassword or mkpasswd ??
   };
@@ -58,5 +60,5 @@
     openFirewall = true;
   };
 
-  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 445 137 138 ];
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [445 137 138];
 }

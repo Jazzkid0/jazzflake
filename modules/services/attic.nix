@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   users.users.atticd = {
     isSystemUser = true;
     group = "atticd";
@@ -33,7 +36,7 @@
       listen = "[::1]:6463";
       database.url = "sqlite:////var/lib/private/atticd/db.sqlite3";
 
-      jwt = { };
+      jwt = {};
 
       storage = {
         type = "local";
@@ -75,6 +78,6 @@
   };
 
   nix.settings = {
-    secret-key-files = [ config.age.secrets.attic-signing-key.path ];
+    secret-key-files = [config.age.secrets.attic-signing-key.path];
   };
 }

@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   services.xserver.enable = false;
   xdg.portal.enable = false;
   security.polkit.enable = lib.mkForce false;

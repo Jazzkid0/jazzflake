@@ -1,21 +1,23 @@
-{ inputs, pkgs, ... }:
-
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     inputs.nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
   ];
 
   config = {
     hardware.graphics.enable = true;
-    
+
     hardware.nvidia = {
       modesetting.enable = true;
       open = false;
       nvidiaPersistenced = true;
     };
 
-    boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_drm" "nvidia_uvm" ];
-    
+    boot.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_drm" "nvidia_uvm"];
+
     services.xserver.enable = false;
 
     programs.hyprland.enable = true;
@@ -26,7 +28,7 @@
 
     xdg.portal = {
       enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+      extraPortals = [pkgs.xdg-desktop-portal-hyprland];
     };
 
     # Audio configuration

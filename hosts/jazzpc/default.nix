@@ -1,12 +1,10 @@
-{ pkgs, ... }:
-{
-  imports =
-    [ 
-      ./hardware-configuration.nix
-      ./hardware/mounts.nix
-    ];
+{pkgs, ...}: {
+  imports = [
+    ./hardware-configuration.nix
+    ./hardware/mounts.nix
+  ];
 
-  age.identityPaths = [ "/home/jazzkid/.ssh/id_ed25519" ];
+  age.identityPaths = ["/home/jazzkid/.ssh/id_ed25519"];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -21,7 +19,7 @@
   users.users.jazzkid = {
     isNormalUser = true;
     description = "jazzkid";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOXr41H8R6YjEFGilGFw3k+KmuPyDaOofxctpQMmY18f jazzkid@jazzsl"

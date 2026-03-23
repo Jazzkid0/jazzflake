@@ -1,6 +1,9 @@
-{ lib, pkgs, config, ... }:
-
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}: {
   home.packages = with pkgs; [
     nerd-fonts.roboto-mono
   ];
