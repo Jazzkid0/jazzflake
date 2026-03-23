@@ -97,6 +97,7 @@
       set -g status-style bg=black,fg=white
 
       # manual window names
+      bind-key -n M-< command-prompt -I "#W" 'rename-window "%%"'
       set-option -g automatic-rename off
       set-option -g allow-rename off
 
