@@ -46,6 +46,7 @@
       attic-client
       jq
       age
+      lynx
     ])
     ++ (with pkgs; [
       ## UNFREE PACKAGES ----- see ./modules/common/unfree-whitelist.nix
