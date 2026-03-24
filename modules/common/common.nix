@@ -7,6 +7,7 @@
 }: {
   imports =
     [
+      ./users.nix
       ./networking.nix
       ./security.nix
       ./nginx.nix
@@ -18,8 +19,6 @@
   i18n.defaultLocale = "en_GB.UTF-8";
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
-
-  programs.zsh.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim
