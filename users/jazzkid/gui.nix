@@ -23,7 +23,10 @@
     # if possible, I'd like to avoid running third-party code. Maybe I could build manually using the flake.nix in that repo as reference.
   ];
 
-  gtk.enable = true;
+  gtk = {
+    enable = true;
+    gtk4.theme = null;
+  };
 
   home.packages = with pkgs; [
     feishin

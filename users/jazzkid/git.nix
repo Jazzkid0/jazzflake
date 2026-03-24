@@ -1,6 +1,7 @@
 {...}: {
   programs.git = {
     enable = true;
+    signing.format = null;
     settings = {
       safe = {
         directory = "/etc/nixos";
