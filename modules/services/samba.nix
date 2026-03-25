@@ -30,6 +30,12 @@
         "map to guest" = "bad user";
         "hosts allow" = "127.0.0.1 192.168.1. 100.64.0.0/10 fd7a:115c:a1e0::/48";
         "hosts deny" = "";
+        # Workaround: Samba 4.22.7 nmbd crashes during local master browser elections
+        # (buffer overflow in become_local_master_browser). Disable the election
+        # participation to prevent the crash while keeping NetBIOS name service active.
+        "local master" = "no";
+        "domain master" = "no";
+        "preferred master" = "no";
       };
 
       "private" = {
