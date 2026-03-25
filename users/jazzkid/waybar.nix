@@ -56,7 +56,7 @@ in {
           workspace-taskbar = {
             enable = true;
             update-active-window = true;
-            format = "{icon} {title:.20}";
+            format = "{icon}";
             icon-size = 14;
             orientation = "horizontal";
           };
