@@ -17,74 +17,65 @@ in {
         modules-left = ["hyprland/workspaces"];
         modules-center = ["hyprland/window"];
         modules-right = ["custom/mako-dnd" "pulseaudio" "tray" "network" "clock"];
-      };
 
-      clock = {
-        format = "{:%Y-%m-%d | %H:%M}";
-        format-alt = "{:%Y-%m-%d}";
-        tooltip-format = "{:%Y-%m-%d | %H:%M}";
-        interval = 1;
-      };
-
-      battery = {
-        states = {
-          warning = 30;
-          critical = 15;
+        clock = {
+          format = "{:%Y-%m-%d | %H:%M}";
+          format-alt = "{:%Y-%m-%d}";
+          tooltip-format = "{:%Y-%m-%d | %H:%M}";
+          interval = 1;
         };
-        format = "{icon} {capacity}%";
-        format-icons = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
-        format-charging = " {capacity}%";
-        format-plugged = " {capacity}%";
-        format-alt = "{icon} {time}";
-        tooltip-format = "{timeTo}, {capacity}%";
-      };
 
-      network = {
-        format-wifi = "󰤨 {signalStrength}%";
-        format-ethernet = "󰈀";
-        format-disconnected = "󰤭";
-        format-alt = "{ifname}: {ipaddr}";
-        tooltip-format = "{ifname}: {ipaddr}";
-        interval = 5;
-      };
+        network = {
+          format-wifi = "󰤨 {signalStrength}%";
+          format-ethernet = "󰈀";
+          format-disconnected = "󰤭";
+          format-alt = "{ifname}: {ipaddr}";
+          tooltip-format = "{ifname}: {ipaddr}";
+          interval = 5;
+        };
 
-      pulseaudio = {
-        format = "{icon} {volume}%";
-        format-muted = "󰝟";
-        format-icons = {
-          default = ["󰕿" "󰖀" "󰕾"];
+        pulseaudio = {
+          format = "{icon} {volume}%";
+          format-muted = "󰝟";
+          format-icons = {
+            default = ["󰕿" "󰖀" "󰕾"];
+          };
+          on-click = "pavucontrol";
+          tooltip-format = "{desc}, {volume}%";
         };
-        on-click = "pavucontrol";
-        tooltip-format = "{desc}, {volume}%";
-      };
 
-      "hyprland/workspaces" = {
-        disable-scroll = false;
-        all-outputs = false;
-        format = "{icon}";
-        format-icons = {
-          "1" = "一";
-          "2" = "二";
-          "3" = "三";
-          "4" = "四";
-          "5" = "五";
-          "6" = "六";
-          "7" = "七";
-          "8" = "八";
-          "9" = "九";
-          "10" = "十";
+        "hyprland/workspaces" = {
+          format = "{icon}: {windows}";
+          format-window-separator = " | ";
+          window-rewrite-default = "?";
+          disable-scroll = false;
+          all-outputs = false;
+          persistent-workspaces = {
+            "*" = 8;
+          };
+          workspace-taskbar = {
+            enable = true;
+            update-active-window = true;
+            format = "{icon} {title:.20}";
+            icon-size = 14;
+            orientation = "horizontal";
+          };
         };
-        persistent-workspaces = {
-          "*" = [];
+
+        "hyprland/window" = {
+          format = "{}";
+          max-length = 50;
+          separate-outputs = true;
         };
-      };
-      "custom/mako-dnd" = {
-        exec = "${makoWaybarScript}";
-        return-type = "json";
-        interval = "once";
-        signal = 1;
-        on-click = "${pkgs.mako}/bin/makoctl mode -t do-not-disturb && ${pkgs.mako}/bin/makoctl reload && ${pkgs.procps}/bin/pkill -RTMIN+1 waybar";
-        exec-if = "${pkgs.mako}/bin/makoctl --version";
+
+        "custom/mako-dnd" = {
+          exec = "${makoWaybarScript}";
+          return-type = "json";
+          interval = "once";
+          signal = 1;
+          on-click = "${pkgs.mako}/bin/makoctl mode -t do-not-disturb && ${pkgs.mako}/bin/makoctl reload && ${pkgs.procps}/bin/pkill -RTMIN+1 waybar";
+          exec-if = "${pkgs.mako}/bin/makoctl --version";
+        };
       };
     };
 
@@ -104,20 +95,25 @@ in {
       #workspaces button.active {
         color: #a6e3a1;
       }
+      #workspaces .workspace-label {
+        padding-left: 3px;
+      }
+      #workspaces .taskbar-window {
+        font-weight: normal;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+      #workspaces .taskbar-window.active {
+        background-color: rgba(166, 227, 161, 0.2);
+      }
       #clock {
         padding: 0 10px;
         background: #cdd6f4;
         color: #32290b;
       }
-      #battery, #network, #pulseaudio {
+      #network, #pulseaudio {
         padding: 0 10px;
         color: #cdd6f4;
-      }
-      #battery.warning {
-        color: #f9e2af;
-      }
-      #battery.critical {
-        color: #f38ba8;
       }
     '';
   };
