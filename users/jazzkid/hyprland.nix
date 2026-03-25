@@ -108,27 +108,27 @@
         "SUPER SHIFT, I, movetoworkspace, 7"
         "SUPER SHIFT, O, movetoworkspace, 8"
 
-        # Move focus (direction - hjkl / arrows)
-        "SUPER CONTROL, H, movefocus, l"
+        # Move focus (columns via layoutmsg, rows via movefocus)
+        "SUPER CONTROL, H, layoutmsg, focus l"
         "SUPER CONTROL, J, movefocus, d"
         "SUPER CONTROL, K, movefocus, u"
-        "SUPER CONTROL, L, movefocus, r"
-        "SUPER, Left, movefocus, l"
-        "SUPER, Right, movefocus, r"
+        "SUPER CONTROL, L, layoutmsg, focus r"
+        "SUPER, Left, layoutmsg, focus l"
+        "SUPER, Right, layoutmsg, focus r"
         "SUPER, Up, movefocus, u"
         "SUPER, Down, movefocus, d"
-        "SUPER CONTROL, Left, movefocus, l"
-        "SUPER CONTROL, Right, movefocus, r"
+        "SUPER CONTROL, Left, layoutmsg, focus l"
+        "SUPER CONTROL, Right, layoutmsg, focus r"
         "SUPER CONTROL, Up, movefocus, u"
         "SUPER CONTROL, Down, movefocus, d"
 
-        # Move window (direction - hjkl / arrows)
-        "SUPER SHIFT, H, movewindow, l"
+        # Swap columns (via layoutmsg) / move window in column
+        "SUPER SHIFT, H, layoutmsg, swapcol l"
         "SUPER SHIFT, J, movewindow, d"
         "SUPER SHIFT, K, movewindow, u"
-        "SUPER SHIFT, L, movewindow, r"
-        "SUPER SHIFT, Left, movewindow, l"
-        "SUPER SHIFT, Right, movewindow, r"
+        "SUPER SHIFT, L, layoutmsg, swapcol r"
+        "SUPER SHIFT, Left, layoutmsg, swapcol l"
+        "SUPER SHIFT, Right, layoutmsg, swapcol r"
         "SUPER SHIFT, Up, movewindow, u"
         "SUPER SHIFT, Down, movewindow, d"
 
