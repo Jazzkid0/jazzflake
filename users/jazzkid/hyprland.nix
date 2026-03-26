@@ -1,4 +1,19 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  workspaceIndicator =
+    pkgs.writeShellScriptBin "workspace-indicator"
+    ''
+      hyprctl notify -1 800 "rgb(a6e3a1)" "fontsize:36  $1 "
+      hyprctl dispatch workspace "$1"
+    '';
+  moveToWorkspace =
+    pkgs.writeShellScriptBin "move-to-workspace"
+    ''
+      hyprctl notify -1 800 "rgb(a6e3a1)" "fontsize:36  $1 "
+      hyprctl dispatch movetoworkspace "$1"
+    '';
+in {
+  home.packages = [workspaceIndicator moveToWorkspace];
+
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -41,7 +56,19 @@
         };
       };
 
-      animations.enabled = false;
+      animations = {
+        enabled = true;
+        bezier = "snap, 0.4, 0, 0.8, 1";
+        animation = [
+          "workspaces, 1, 0.5, snap, slidefade 8%"
+          "windows, 1, 0.5, snap, slide"
+          "windowsIn, 1, 1, snap, popin 80%"
+          "windowsOut, 1, 0.5, snap, popin 80%"
+          "fade, 1, 0.5, default"
+          "border, 1, 0.5, default"
+          "specialWorkspace, 1, 0.5, snap, slidefadevert 8%"
+        ];
+      };
 
       input = {
         kb_layout = "us";
@@ -89,24 +116,24 @@
         "SUPER SHIFT, F, togglefloating"
 
         # Workspace navigation (Colemak: arst = 1-4, neio = 5-9)
-        "SUPER, A, workspace, 1"
-        "SUPER, R, workspace, 2"
-        "SUPER, S, workspace, 3"
-        "SUPER, T, workspace, 4"
-        "SUPER, N, workspace, 5"
-        "SUPER, E, workspace, 6"
-        "SUPER, I, workspace, 7"
-        "SUPER, O, workspace, 8"
+        "SUPER, A, exec, workspace-indicator 1"
+        "SUPER, R, exec, workspace-indicator 2"
+        "SUPER, S, exec, workspace-indicator 3"
+        "SUPER, T, exec, workspace-indicator 4"
+        "SUPER, N, exec, workspace-indicator 5"
+        "SUPER, E, exec, workspace-indicator 6"
+        "SUPER, I, exec, workspace-indicator 7"
+        "SUPER, O, exec, workspace-indicator 8"
 
         # Move window to workspace (Colemak)
-        "SUPER SHIFT, A, movetoworkspace, 1"
-        "SUPER SHIFT, R, movetoworkspace, 2"
-        "SUPER SHIFT, S, movetoworkspace, 3"
-        "SUPER SHIFT, T, movetoworkspace, 4"
-        "SUPER SHIFT, N, movetoworkspace, 5"
-        "SUPER SHIFT, E, movetoworkspace, 6"
-        "SUPER SHIFT, I, movetoworkspace, 7"
-        "SUPER SHIFT, O, movetoworkspace, 8"
+        "SUPER SHIFT, A, exec, move-to-workspace 1"
+        "SUPER SHIFT, R, exec, move-to-workspace 2"
+        "SUPER SHIFT, S, exec, move-to-workspace 3"
+        "SUPER SHIFT, T, exec, move-to-workspace 4"
+        "SUPER SHIFT, N, exec, move-to-workspace 5"
+        "SUPER SHIFT, E, exec, move-to-workspace 6"
+        "SUPER SHIFT, I, exec, move-to-workspace 7"
+        "SUPER SHIFT, O, exec, move-to-workspace 8"
 
         # Move focus (columns via layoutmsg, rows via movefocus)
         "SUPER CONTROL, H, layoutmsg, focus l"
