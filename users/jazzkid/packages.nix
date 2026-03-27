@@ -48,9 +48,10 @@
       age
       lynx
       btop
-      xfce.thunar
-      xfce.thunar-archive-plugin
-      xfce.thunar-volman
+       thunar
+       thunar-archive-plugin
+       thunar-volman
+       nix-diff
     ])
     ++ (with pkgs; [
       ## UNFREE PACKAGES ----- see ./modules/common/unfree-whitelist.nix
