@@ -161,6 +161,7 @@ in {
 
         # Special workspace (scratchpad)
         "SUPER, X, togglespecialworkspace, magic"
+        "SUPER SHIFT, X, movetoworkspace, special:magic"
 
         # Media keys (XF86 codes - universal)
         ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
