@@ -47,6 +47,7 @@
       jq
       age
       lynx
+      btop
     ])
     ++ (with pkgs; [
       ## UNFREE PACKAGES ----- see ./modules/common/unfree-whitelist.nix
