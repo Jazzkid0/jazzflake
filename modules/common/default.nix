@@ -1,19 +1,28 @@
 {
+  user,
+  inputs,
   pkgs,
+  home-manager,
   lib,
   gui,
-  unfree-whitelist,
   ...
 }: {
   imports =
     [
+      home-manager.nixosModules.home-manager
       ./users.nix
       ./networking.nix
       ./security.nix
       ./nginx.nix
+      ./unfree-whitelist.nix
     ]
-    ++ lib.optionals gui [./gui.nix]
-    ++ lib.optionals unfree-whitelist [./unfree-whitelist.nix];
+    ++ lib.optionals gui [./gui.nix];
+
+  home-manager = {
+    useGlobalPkgs = true;
+    extraSpecialArgs = {inherit inputs gui;};
+    users.${user} = import ../../users/${user}/home.nix;
+  };
 
   time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";

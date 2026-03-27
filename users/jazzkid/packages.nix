@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   home.packages =
-    (with pkgs; [
+    with pkgs; [
       vim
       wget
       curl
@@ -48,16 +48,7 @@
       age
       lynx
       btop
-       thunar
-       thunar-archive-plugin
-       thunar-volman
-       nix-diff
-    ])
-    ++ (with pkgs; [
-      ## UNFREE PACKAGES ----- see ./modules/common/unfree-whitelist.nix
-    ])
-    ++ (with pkgs; [
-      ## stuff in my local cache, hopefully
+      nix-diff
       opencode
-    ]);
+    ];
 }

@@ -1,6 +1,7 @@
 {...}: {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/server/server.nix
   ];
 
   boot.loader.systemd-boot.enable = true;

@@ -30,7 +30,10 @@
 
   home.packages = with pkgs; [
     feishin
-    spotify
     obs-studio
+    thunar
+    thunar-archive-plugin
+    thunar-volman
+    spotify
   ];
 }
