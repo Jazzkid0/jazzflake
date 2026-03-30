@@ -50,5 +50,7 @@
       btop
       nix-diff
       opencode
+      yazi
+      ncdu
     ];
 }
