@@ -5,5 +5,9 @@
       "nvidia-settings"
       "spotify"
       "steam-unwrapped"
+      "cuda_cudart"
+      "cuda_nvcc"
+      "cuda_cccl"
+      "libcublas"
     ];
 }

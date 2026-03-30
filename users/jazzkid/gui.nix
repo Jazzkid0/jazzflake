@@ -21,6 +21,7 @@
 
     # how do I install things like helium-browser? It's released as a .appimage, and there's also a third party flake that builds it at github:AlvaroParker/helium-nix .
     # if possible, I'd like to avoid running third-party code. Maybe I could build manually using the flake.nix in that repo as reference.
+    ./ollama.nix
   ];
 
   gtk = {
