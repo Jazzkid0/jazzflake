@@ -53,5 +53,12 @@
       yazi
       ncdu
       wakeonlan
+      traceroute
+      tcpdump
+      bandwhich
+      mtr
+      ttl
+      tshark
+      ethtool
     ];
 }
