@@ -52,5 +52,6 @@
       opencode
       yazi
       ncdu
+      wakeonlan
     ];
 }
