@@ -33,9 +33,11 @@
       jazzserver  = { user = "jazzkid"; domain = "dev.jazzkid.xyz"; };
     };
 
+    sshKeys = import ./modules/common/ssh-keys.nix;
+
     mkSystem = name: cfg: nixpkgs.lib.nixosSystem {
       specialArgs = {
-        inherit inputs self;
+        inherit inputs self sshKeys;
         hostname = name;
         inherit (cfg) user domain;
         agenix = inputs.agenix;

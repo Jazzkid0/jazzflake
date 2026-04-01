@@ -21,6 +21,7 @@
     ../../modules/services/readarr.nix
     ../../modules/services/bazarr.nix
     ../../modules/services/jellyseerr.nix
+    ../../modules/services/git-remote.nix
   ];
 
   services.tailscale = {
