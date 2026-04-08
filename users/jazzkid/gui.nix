@@ -16,6 +16,8 @@
     # ./grimblast.nix # screenshots
     ./mako.nix # notifs
 
+    ./obs-studio.nix
+
     ./ollama.nix
   ];
 
@@ -26,7 +28,6 @@
 
   home.packages = with pkgs; [
     feishin
-    obs-studio
     thunar
     thunar-archive-plugin
     thunar-volman
