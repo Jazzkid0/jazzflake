@@ -34,6 +34,7 @@
     spotify
     qt5.qtwayland
     qt6.qtwayland
+    vlc
     # once cache works:
     # helium
     # slippi
