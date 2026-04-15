@@ -60,5 +60,6 @@
       ttl
       tshark
       ethtool
+      usbutils
     ];
 }
