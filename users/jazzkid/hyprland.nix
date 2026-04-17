@@ -175,9 +175,13 @@ in {
         ", XF86AudioPrev, exec, playerctl previous"
         ", XF86MonBrightnessUp, exec, brightnessctl set +5%"
         ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
+
+        # Scroll horizontally in column layout
+        "SUPER, mouse_down, cyclenext"
+        "SUPER, mouse_up, cyclenext, prev"
       ];
 
-      # Mouse bindings
+      # Mouse bindings for window actions
       bindm = [
         "SUPER, mouse:272, movewindow"
         "SUPER, mouse:273, resizewindow"
