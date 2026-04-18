@@ -111,7 +111,7 @@
 
       # left
       set -g status-left-length 20
-      set -g status-left "#[fg=black,bold, bg=yellow] #S #[bg=black] #[default]"
+      set -g status-left " #H #[fg=black,bold, bg=yellow] #S #[bg=black] #[default]"
 
       # right
       set -g status-right-length 40
