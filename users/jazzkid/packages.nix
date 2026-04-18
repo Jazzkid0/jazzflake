@@ -24,7 +24,6 @@
       flyctl
       fd
       markdown-oxide
-      vimPlugins.rustaceanvim
       openssl
       lua-language-server
       bunbun

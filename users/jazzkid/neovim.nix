@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{inputs, pkgs, ...}: {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -6,6 +6,9 @@
     vimAlias = false;
     withRuby = false;
     withPython3 = false;
+    plugins = with pkgs.vimPlugins; [
+      rustaceanvim
+    ];
   };
 
   # Link the neovim configuration from the flake input
