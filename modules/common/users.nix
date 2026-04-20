@@ -1,4 +1,8 @@
-{pkgs, sshKeys, ...}: {
+{
+  pkgs,
+  sshKeys,
+  ...
+}: {
   age.identityPaths = ["/home/jazzkid/.ssh/id_ed25519"];
 
   nix.settings.trusted-users = ["jazzkid"];

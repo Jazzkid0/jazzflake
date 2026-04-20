@@ -1,6 +1,6 @@
 let
   sshKeys = import ../modules/common/ssh-keys.nix;
-  keys = with sshKeys; [ jazzsl jazzserver jazznas jazzpc ];
+  keys = with sshKeys; [jazzsl jazzserver jazznas jazzpc];
 in {
   "cloudflare_apiTokenFile.age".publicKeys = keys;
   "transmission_credentialsFile.age".publicKeys = keys;

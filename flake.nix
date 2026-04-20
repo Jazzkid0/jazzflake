@@ -26,30 +26,46 @@
     };
   };
 
-  outputs = { self, nixpkgs, deploy-rs, ... } @ inputs: let
+  outputs = {
+    self,
+    nixpkgs,
+    deploy-rs,
+    ...
+  } @ inputs: let
     nodes = {
-      jazzpc      = { user = "jazzkid"; domain = "pc.jazzkid.xyz"; gui = true; };
-      jazznas     = { user = "jazzkid"; domain = "nas.jazzkid.xyz"; };
-      jazzserver  = { user = "jazzkid"; domain = "dev.jazzkid.xyz"; };
+      jazzpc = {
+        user = "jazzkid";
+        domain = "pc.jazzkid.xyz";
+        gui = true;
+      };
+      jazznas = {
+        user = "jazzkid";
+        domain = "nas.jazzkid.xyz";
+      };
+      jazzserver = {
+        user = "jazzkid";
+        domain = "dev.jazzkid.xyz";
+      };
     };
 
     sshKeys = import ./modules/common/ssh-keys.nix;
 
-    mkSystem = name: cfg: nixpkgs.lib.nixosSystem {
-      specialArgs = {
-        inherit inputs self sshKeys;
-        hostname = name;
-        inherit (cfg) user domain;
-        agenix = inputs.agenix;
-        home-manager = inputs.home-manager;
-        gui = cfg.gui or false;
+    mkSystem = name: cfg:
+      nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs self sshKeys;
+          hostname = name;
+          inherit (cfg) user domain;
+          agenix = inputs.agenix;
+          home-manager = inputs.home-manager;
+          gui = cfg.gui or false;
+        };
+        modules = [
+          inputs.agenix.nixosModules.default
+          ./hosts/${name}
+          ./modules/common
+        ];
       };
-      modules = [ 
-        inputs.agenix.nixosModules.default
-        ./hosts/${name}
-        ./modules/common
-      ];
-    };
 
     mkDeploy = name: cfg: {
       hostname = cfg.domain;

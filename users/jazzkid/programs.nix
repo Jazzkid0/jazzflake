@@ -11,5 +11,4 @@
     ./zoxide.nix
     ./htop.nix
   ];
-
 }

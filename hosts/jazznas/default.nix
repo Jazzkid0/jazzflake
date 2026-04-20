@@ -1,15 +1,20 @@
-{inputs, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ./hardware/mounts.nix
     ./hardware/disks.nix
 
-    ../../modules/server/server.nix
     ../../modules/services/samba.nix
     ../../modules/services/silverbullet.nix
     ../../modules/services/attic.nix
     ../../modules/services/cache-builder.nix
+    ../../modules/services/git-remote.nix
 
+    # TODO: abandon nixarr and configure manually
     inputs.nixarr.nixosModules.default
     ../../modules/services/nixarr.nix
     ../../modules/services/transmission.nix
@@ -21,7 +26,6 @@
     ../../modules/services/readarr.nix
     ../../modules/services/bazarr.nix
     ../../modules/services/jellyseerr.nix
-    ../../modules/services/git-remote.nix
   ];
 
   services.tailscale = {
@@ -37,6 +41,16 @@
   users.users.jazzkid.extraGroups = ["media"];
 
   users.groups.media = {};
+
+  services.xserver.enable = false;
+  xdg.portal.enable = false;
+  security.polkit.enable = lib.mkForce false;
+  systemd.targets = {
+    sleep.enable = false;
+    suspend.enable = false;
+    hibernate.enable = false;
+    hybrid-sleep.enable = false;
+  };
 
   system.stateVersion = "24.11";
 }

@@ -22,8 +22,8 @@
   # wake-on-lan fix
   systemd.services.wol-persist = {
     description = "Persist Wake-on-LAN setting through shutdown";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
+    wantedBy = ["multi-user.target"];
+    after = ["network.target"];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
