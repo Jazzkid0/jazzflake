@@ -7,10 +7,10 @@
 
     ./wofi.nix # launcher
 
+    ./screenshot.nix
     ./clipboard.nix
 
     ./hyprpaper.nix # wallpapers
-    # ./grimblast.nix # screenshots
     ./mako.nix # notifs
 
     ./obs-studio.nix

@@ -1,0 +1,5 @@
+{...}: {
+  programs.hyprshot = {
+    enable = true;
+  };
+}
