@@ -28,8 +28,7 @@ in {
       exec-once = [
         "${pkgs.waybar}/bin/waybar"
         "${pkgs.mako}/bin/mako"
-        "wl-paste --type text --watch cliphist store" # Stores only text data
-        "wl-paste --type image --watch cliphist store" # Stores only image data
+        "${pkgs.cursor-clip}/bin/cursor-clip --daemon"
       ];
 
       general = {
@@ -52,9 +51,7 @@ in {
       decoration = {
         rounding = 8;
         blur = {
-          enabled = true;
-          size = 4;
-          passes = 1;
+          enabled = false;
         };
       };
 
@@ -97,16 +94,15 @@ in {
         "SUPER, K, killactive"
         "SUPER CONTROL, K, forcekillactive"
 
-        ## PROGRAMS $$
+        ## PROGRAMS ##
 
         # Launcher / Terminal
-        "SUPER, D, exec, tofi-drun"
-        "SUPER SHIFT, D, exec, tofi-run"
-        "SUPER, H, exec, alacritty"
+        "SUPER, D, exec, ${pkgs.tofi}/bin/tofi-drun"
+        "SUPER SHIFT, D, exec, ${pkgs.tofi}/bin/tofi-run"
+        "SUPER, H, exec, ${pkgs.alacritty}/bin/alacritty"
 
-        "SUPER, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
-        "SUPER, V, exec, cliphist list | wofi --dmenu --pre-display-cmd \"echo '%s' | cut -f 2\" | cliphist decode | wl-copy"
-        "SUPER SHIFT, V, exec, cliphist store"
+        "SUPER, V, exec, ${pkgs.cursor-clip}/bin/cursor-clip"
+        "SUPER SHIFT, V, exec, ${pkgs.cursor-clip}/bin/cursor-clip"
 
         "SUPER, Q, exec, ${pkgs.mako}/bin/makoctl mode -t do-not-disturb && ${pkgs.mako}/bin/makoctl reload && ${pkgs.procps}/bin/pkill -RTMIN+1 waybar"
 
