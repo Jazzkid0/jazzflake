@@ -5,7 +5,7 @@
     ./waybar.nix
     ./alacritty.nix
 
-    ./wofi.nix # launcher
+    ./launcher.nix
 
     ./screenshot.nix
     ./clipboard.nix

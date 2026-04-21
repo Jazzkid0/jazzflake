@@ -100,8 +100,8 @@ in {
         ## PROGRAMS $$
 
         # Launcher / Terminal
-        "SUPER, D, exec, wofi --show drun"
-        "SUPER SHIFT, D, exec, wofi --show run"
+        "SUPER, D, exec, tofi-drun"
+        "SUPER SHIFT, D, exec, tofi-run"
         "SUPER, H, exec, alacritty"
 
         "SUPER, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
