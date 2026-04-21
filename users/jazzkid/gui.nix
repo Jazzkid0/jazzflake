@@ -9,6 +9,7 @@
 
     ./screenshot.nix
     ./clipboard.nix
+    ./shutdown.nix
 
     ./hyprpaper.nix # wallpapers
     ./mako.nix # notifs

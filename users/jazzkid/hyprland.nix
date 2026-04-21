@@ -90,7 +90,7 @@ in {
       # FORMAT: "Mods, key, dispatcher, params"
       bind = [
         # Exit / Kill
-        "SUPER SHIFT, K, exit"
+        "SUPER SHIFT, K, exec, ${pkgs.hyprshutdown}/bin/hyprshutdown --post-cmd 'shutdown now'"
         "SUPER, K, killactive"
         "SUPER CONTROL, K, forcekillactive"
 
