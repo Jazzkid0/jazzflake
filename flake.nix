@@ -84,6 +84,8 @@
       nodes = nixpkgs.lib.mapAttrs mkDeploy nodes;
     };
 
-    checks = builtins.mapAttrs (_: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) {
+      x86_64-linux = deploy-rs.lib.x86_64-linux;
+    };
   };
 }
