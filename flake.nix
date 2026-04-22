@@ -56,7 +56,6 @@
           inherit inputs self sshKeys;
           hostname = name;
           inherit (cfg) user domain;
-          agenix = inputs.agenix;
           home-manager = inputs.home-manager;
           gui = cfg.gui or false;
         };
