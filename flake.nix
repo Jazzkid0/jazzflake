@@ -87,5 +87,7 @@
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) {
       x86_64-linux = deploy-rs.lib.x86_64-linux;
     };
+
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
   };
 }
