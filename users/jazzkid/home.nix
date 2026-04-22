@@ -5,11 +5,11 @@
 }: {
   imports =
     [
-      ./programs.nix
+      ./programs/tui
       ./packages.nix
     ]
     ++ lib.optionals gui [
-      ./gui.nix
+      ./programs/gui
     ];
 
   home.username = "jazzkid";
