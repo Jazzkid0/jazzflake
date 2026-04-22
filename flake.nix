@@ -32,10 +32,6 @@
     deploy-rs,
     ...
   } @ inputs: let
-    users = {
-      jazzkid = {
-      };
-    };
     nodes = {
       jazzpc = {
         user = "jazzkid";
@@ -68,6 +64,7 @@
           inputs.agenix.nixosModules.default
           ./hosts/${name}
           ./modules/common
+          ./users/${cfg.user}
         ];
       };
 

@@ -1,7 +1,6 @@
 {
   config,
-  lib,
-  pkgs,
+  sshKeys,
   ...
 }: {
   age.secrets.nix-netrc = {
@@ -10,6 +9,8 @@
     group = "users";
     mode = "0400";
   };
+
+  users.users.root.openssh.authorizedKeys.keys = with sshKeys; [jazzsl jazzserver jazznas jazzpc];
 
   nix.settings = {
     substituters = [

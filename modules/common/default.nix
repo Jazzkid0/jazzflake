@@ -10,7 +10,6 @@
   imports =
     [
       home-manager.nixosModules.home-manager
-      ./users.nix
       ./networking.nix
       ./security.nix
       ./nginx.nix
@@ -20,7 +19,7 @@
 
   home-manager = {
     useGlobalPkgs = true;
-    extraSpecialArgs = {inherit inputs gui;};
+    extraSpecialArgs = {inherit inputs user gui;};
     users.${user} = import ../../users/${user}/home.nix;
   };
 
@@ -28,6 +27,8 @@
   i18n.defaultLocale = "en_GB.UTF-8";
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  programs.zsh.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim

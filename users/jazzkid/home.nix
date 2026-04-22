@@ -1,5 +1,6 @@
 {
   lib,
+  user,
   gui,
   ...
 }: {
@@ -12,8 +13,8 @@
       ./programs/gui
     ];
 
-  home.username = "jazzkid";
-  home.homeDirectory = "/home/jazzkid";
+  home.username = user;
+  home.homeDirectory = "/home/${user}";
 
   home.stateVersion = "24.05";
 

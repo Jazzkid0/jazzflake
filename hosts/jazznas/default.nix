@@ -1,6 +1,7 @@
 {
   inputs,
   lib,
+  user,
   ...
 }: {
   imports = [
@@ -38,7 +39,7 @@
   networking.hostName = "jazznas";
   networking.networkmanager.enable = true;
 
-  users.users.jazzkid.extraGroups = ["media"];
+  users.users.${user}.extraGroups = ["media"];
 
   users.groups.media = {};
 
