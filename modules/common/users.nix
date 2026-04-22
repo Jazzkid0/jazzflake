@@ -1,6 +1,7 @@
 {
   pkgs,
   sshKeys,
+  user,
   ...
 }: {
   age.identityPaths = ["/home/jazzkid/.ssh/id_ed25519"];
@@ -9,7 +10,7 @@
 
   programs.zsh.enable = true;
 
-  users.users.jazzkid = {
+  users.users.${user} = {
     isNormalUser = true;
     description = "jazzkid";
     extraGroups = ["networkmanager" "wheel"];

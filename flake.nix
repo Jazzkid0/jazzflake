@@ -32,6 +32,10 @@
     deploy-rs,
     ...
   } @ inputs: let
+    users = {
+      jazzkid = {
+      };
+    };
     nodes = {
       jazzpc = {
         user = "jazzkid";
