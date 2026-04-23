@@ -97,8 +97,8 @@ in {
         ## PROGRAMS ##
 
         # Launcher / Terminal
-        "SUPER, D, exec, ${pkgs.tofi}/bin/tofi-drun"
-        "SUPER SHIFT, D, exec, ${pkgs.tofi}/bin/tofi-run"
+        "SUPER, D, exec, ${pkgs.tofi}/bin/tofi-drun | xargs hyprctl dispatch exec --"
+        "SUPER SHIFT, D, exec, ${pkgs.tofi}/bin/tofi-run | exargs hyprctl dispatch exec --"
         "SUPER, H, exec, ${pkgs.alacritty}/bin/alacritty"
 
         "SUPER, V, exec, ${pkgs.cursor-clip}/bin/cursor-clip"
