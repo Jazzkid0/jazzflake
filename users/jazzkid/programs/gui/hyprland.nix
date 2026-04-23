@@ -96,13 +96,15 @@ in {
 
         ## PROGRAMS ##
 
-        # Launcher / Terminal
         "SUPER, D, exec, ${pkgs.tofi}/bin/tofi-drun | xargs hyprctl dispatch exec --"
         "SUPER SHIFT, D, exec, ${pkgs.tofi}/bin/tofi-run | exargs hyprctl dispatch exec --"
+
         "SUPER, H, exec, ${pkgs.alacritty}/bin/alacritty"
 
         "SUPER, V, exec, ${pkgs.cursor-clip}/bin/cursor-clip"
         "SUPER SHIFT, V, exec, ${pkgs.cursor-clip}/bin/cursor-clip"
+
+        "SUPER, G, exec, ${pkgs.hyprshot}/bin/hyprshot --clipboard-only -m region"
 
         "SUPER, Q, exec, ${pkgs.mako}/bin/makoctl mode -t do-not-disturb && ${pkgs.mako}/bin/makoctl reload && ${pkgs.procps}/bin/pkill -RTMIN+1 waybar"
 
