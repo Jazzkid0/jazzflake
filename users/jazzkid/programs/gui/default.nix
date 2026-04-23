@@ -33,6 +33,7 @@
     qt5.qtwayland
     qt6.qtwayland
     vlc
+    libreoffice
     # once cache works:
     # helium
     # slippi
