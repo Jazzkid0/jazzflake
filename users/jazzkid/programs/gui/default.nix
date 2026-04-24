@@ -34,6 +34,7 @@
     qt6.qtwayland
     vlc
     libreoffice
+    losslesscut-bin
     # once cache works:
     # helium
     # slippi
