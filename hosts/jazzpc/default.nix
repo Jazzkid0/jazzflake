@@ -2,6 +2,7 @@
   imports = [
     ./hardware-configuration.nix
     ./hardware/mounts.nix
+    ../../modules/services/opencode-proxy.nix
   ];
 
   boot.loader = {

@@ -14,6 +14,10 @@
     web = {
       enable = true;
       environmentFile = null;
+      extraArgs = [
+        "--port"
+        "32123"
+      ];
     };
   };
 }
