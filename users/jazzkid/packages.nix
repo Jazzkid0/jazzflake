@@ -47,7 +47,6 @@
     lynx
     btop
     nix-diff
-    opencode
     yazi
     ncdu
     wakeonlan

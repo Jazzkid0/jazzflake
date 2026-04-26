@@ -10,5 +10,6 @@
     ./jujutsu.nix
     ./zoxide.nix
     ./htop.nix
+    ./opencode.nix
   ];
 }
