@@ -46,6 +46,10 @@
         user = "jazzkid";
         domain = "dev.jazzkid.xyz";
       };
+      jazznode = {
+        user = "exit-node";
+        domain = "exit-node.jazzkid.xyz";
+      };
     };
 
     sshKeys = import ./modules/common/ssh-keys.nix;

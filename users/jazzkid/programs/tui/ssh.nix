@@ -60,6 +60,10 @@ _: {
         hostname = "pc.jazzkid.xyz";
         user = "jazzkid";
       };
+      "jazznode" = {
+        hostname = "exit-node.jazzkid.xyz";
+        user = "exit-node";
+      };
     };
   };
 }
