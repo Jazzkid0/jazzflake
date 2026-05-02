@@ -7,6 +7,10 @@ _: {
         pager = "bat --plain";
         diff-formatter = ["difft" "--color=always" "$left" "$right"];
       };
+      user = {
+        email = "jazzkid@jazzkid.xyz";
+        name = "jazzkid";
+      };
     };
   };
 }
