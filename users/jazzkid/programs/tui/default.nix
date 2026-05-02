@@ -8,6 +8,7 @@
     ./neovim.nix
     ./bat.nix
     ./jujutsu.nix
+    ./jjui.nix
     ./zoxide.nix
     ./htop.nix
     ./opencode.nix
