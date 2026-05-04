@@ -17,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixarr = {
-      url = "github:rasmus-kirk/nixarr";
+      url = "github:nix-media-server/nixarr";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nvim-config = {

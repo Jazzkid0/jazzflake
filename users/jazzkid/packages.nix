@@ -55,7 +55,6 @@
     bandwhich
     mtr
     ttl
-    tshark
     ethtool
     usbutils
   ];

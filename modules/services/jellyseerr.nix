@@ -5,13 +5,11 @@
   nixarr,
   ...
 }: {
-  users.users.jellyseerr = {
+  users.users.seerr = {
     extraGroups = ["media"];
   };
 
-  users.groups.jellyseerr = {};
-
-  nixarr.jellyseerr = {
+  nixarr.seerr = {
     enable = true;
     openFirewall = true;
   };
