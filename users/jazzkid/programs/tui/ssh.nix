@@ -18,6 +18,14 @@ _: {
         identityFile = "~/.ssh/id_ed25519_public";
         identitiesOnly = true;
       };
+      "dev" = {
+        hostname = "dev.jazzkid.xyz";
+        user = "jazzkid";
+      };
+      "server" = {
+        hostname = "dev.jazzkid.xyz";
+        user = "jazzkid";
+      };
       "jazzserver" = {
         hostname = "dev.jazzkid.xyz";
         user = "jazzkid";
@@ -30,6 +38,10 @@ _: {
         hostname = "nas.jazzkid.xyz";
         user = "jazzkid";
       };
+      "nas" = {
+        hostname = "nas.jazzkid.xyz";
+        user = "jazzkid";
+      };
       "nas.jazzkid.xyz" = {
         hostname = "nas.jazzkid.xyz";
         user = "jazzkid";
@@ -39,6 +51,14 @@ _: {
         user = "git";
         identityFile = "~/.ssh/id_ed25519";
         identitiesOnly = true;
+      };
+      "pc" = {
+        hostname = "pc.jazzkid.xyz";
+        user = "jazzkid";
+      };
+      "pc.jazzkid.xyz" = {
+        hostname = "pc.jazzkid.xyz";
+        user = "jazzkid";
       };
     };
   };
