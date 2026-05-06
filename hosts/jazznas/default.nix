@@ -14,6 +14,7 @@
     ../../modules/services/attic.nix
     ../../modules/services/cache-builder.nix
     ../../modules/services/git-remote.nix
+    ../../modules/services/landing-page.nix
 
     # TODO: abandon nixarr and configure manually
     inputs.nixarr.nixosModules.default
