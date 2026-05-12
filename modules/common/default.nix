@@ -14,6 +14,7 @@
       ./networking.nix
       ./security.nix
       ./nginx.nix
+      ./node-exporter.nix
       ./unfree-whitelist.nix
     ]
     ++ lib.optionals gui [./gui.nix];

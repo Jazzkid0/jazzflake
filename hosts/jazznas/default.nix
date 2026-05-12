@@ -29,6 +29,7 @@
     ../../modules/services/bazarr.nix
     ../../modules/services/storage-management.nix
     ../../modules/services/jellyseerr.nix
+    ../../modules/services/prometheus.nix
   ];
 
   services.tailscale = {

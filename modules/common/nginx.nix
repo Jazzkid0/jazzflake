@@ -40,6 +40,7 @@
     recommendedOptimisation = true;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
+    statusPage = true;
     virtualHosts.${domain} = {
       forceSSL = true;
       enableACME = true;
@@ -53,4 +54,11 @@
 
   networking.firewall.allowedTCPPorts = [80 443];
   networking.firewall.allowedUDPPorts = [443];
+
+  services.prometheus.exporters.nginx = {
+    enable = true;
+    openFirewall = false;
+  };
+
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [9113];
 }
