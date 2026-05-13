@@ -59,10 +59,10 @@ in {
 
       scrolling = {
         direction = "right";
-        fullscreen_on_one_column = true;
+        fullscreen_on_one_column = false;
         column_width = 0.8;
         focus_fit_method = 0;
-        follow_focus = true;
+        follow_focus = false;
         follow_min_visible = 0.4;
         explicit_column_widths = "0.333, 0.5, 0.667, 1.0";
       };
@@ -194,8 +194,8 @@ in {
         ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
 
         # Scroll horizontally in column layout
-        "SUPER, mouse_down, cyclenext"
-        "SUPER, mouse_up, cyclenext, prev"
+        "SUPER, mouse_down, layoutmsg, move +200"
+        "SUPER, mouse_up, layoutmsg, move -200"
       ];
 
       # Mouse bindings for window actions
