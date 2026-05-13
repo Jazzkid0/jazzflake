@@ -16,7 +16,7 @@
 
     ./obs-studio.nix
 
-    ./ollama.nix
+    # ./ollama.nix
   ];
 
   gtk = {
