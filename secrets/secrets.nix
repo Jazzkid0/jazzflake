@@ -11,4 +11,5 @@ in {
   "attic-token.age".publicKeys = keys;
   "nix-netrc.age".publicKeys = keys;
   "samba-creds.age".publicKeys = keys;
+  "opencode-env.age".publicKeys = keys;
 }

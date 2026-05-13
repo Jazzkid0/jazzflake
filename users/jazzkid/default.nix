@@ -15,4 +15,10 @@
   age.identityPaths = ["/home/${user}/.ssh/id_ed25519"];
 
   nix.settings.trusted-users = ["${user}"];
+
+  age.secrets.opencode-env = {
+    file = ../../secrets/opencode-env.age;
+    owner = user;
+    group = "users";
+  };
 }
