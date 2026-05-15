@@ -15,6 +15,7 @@
     ./mako.nix # notifs
 
     ./obs-studio.nix
+    ./imv.nix
 
     # ./ollama.nix
   ];
