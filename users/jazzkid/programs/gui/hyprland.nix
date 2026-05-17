@@ -11,8 +11,27 @@
       hyprctl notify -1 800 "rgb(a6e3a1)" "fontsize:36  $1 "
       hyprctl dispatch movetoworkspace "$1"
     '';
+  powerMenu =
+    pkgs.writeShellScriptBin "power-menu"
+    ''
+      action=$(printf "Preview\nExit hyprland\nExit ly\nReboot\nShutdown" | ${pkgs.tofi}/bin/tofi --prompt-text "Power: ")
+      [ -z "$action" ] && exit
+      case "$action" in
+        "Preview") ${pkgs.hyprshutdown}/bin/hyprshutdown --dry-run ;;
+        *)
+          confirm=$(printf "Yes\nNo" | ${pkgs.tofi}/bin/tofi --prompt-text "$action? ")
+          [ "$confirm" != "Yes" ] && exit
+          case "$action" in
+            "Exit hyprland") ${pkgs.hyprshutdown}/bin/hyprshutdown ;;
+            "Exit ly") ${pkgs.hyprshutdown}/bin/hyprshutdown --post-cmd 'loginctl terminate-user $USER' ;;
+            "Reboot") ${pkgs.hyprshutdown}/bin/hyprshutdown --post-cmd 'systemctl reboot' ;;
+            "Shutdown") ${pkgs.hyprshutdown}/bin/hyprshutdown --post-cmd 'systemctl poweroff' ;;
+          esac
+          ;;
+      esac
+    '';
 in {
-  home.packages = [workspaceIndicator moveToWorkspace];
+  home.packages = [workspaceIndicator moveToWorkspace powerMenu];
 
   services.hyprpolkitagent.enable = true;
 
@@ -90,7 +109,7 @@ in {
       # FORMAT: "Mods, key, dispatcher, params"
       bind = [
         # Exit / Kill
-        "SUPER SHIFT, K, exec, ${pkgs.hyprshutdown}/bin/hyprshutdown --post-cmd 'shutdown now'"
+        "SUPER SHIFT, Escape, exec, power-menu"
         "SUPER, K, killactive"
         "SUPER CONTROL, K, forcekillactive"
 
