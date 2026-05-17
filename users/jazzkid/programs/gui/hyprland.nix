@@ -104,7 +104,7 @@ in {
         "SUPER, V, exec, ${pkgs.cursor-clip}/bin/cursor-clip"
         "SUPER SHIFT, V, exec, ${pkgs.cursor-clip}/bin/cursor-clip"
 
-        "SUPER, G, exec, ${pkgs.hyprshot}/bin/hyprshot --clipboard-only -m region"
+        "SUPER, G, exec, mkdir -p $HOME/downloads/images && ${pkgs.hyprshot}/bin/hyprshot -m region -o $HOME/downloads/images"
 
         "SUPER, Q, exec, ${pkgs.mako}/bin/makoctl mode -t do-not-disturb && ${pkgs.mako}/bin/makoctl reload && ${pkgs.procps}/bin/pkill -RTMIN+1 waybar"
 
