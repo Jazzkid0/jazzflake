@@ -34,7 +34,7 @@
       # selection keybinds
       bind-key -n M-V copy-mode
       bind-key -T copy-mode-vi v send-keys -X begin-selection
-      bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+      bind-key -T copy-mode-vi M-v send-keys -X rectangle-toggle
       bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
 
       # pane base index
@@ -90,16 +90,19 @@
       bind-key -n M-8 select-window -t 8
       bind-key -n M-9 select-window -t 9
 
+
+      # manual window names
+      set-option -g automatic-rename off
+      set-option -g allow-rename off
+
+      bind-key -n M-< command-prompt -I "" 'rename-window "%%"'
+      bind-key -n M-> command-prompt -I "#S" 'rename-session "%%"'
+
       ## styling ##
 
       # colors
       set -ag terminal-overrides ",$TERM:Tc"
       set -g status-style bg=black,fg=white
-
-      # manual window names
-      bind-key -n M-< command-prompt -I "#W" 'rename-window "%%"'
-      set-option -g automatic-rename off
-      set-option -g allow-rename off
 
       # Inactive window style
       set -g window-status-style bg=black
