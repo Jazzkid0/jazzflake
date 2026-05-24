@@ -57,5 +57,6 @@
     ttl
     ethtool
     usbutils
+    slippi-launcher-desktop
   ];
 }

@@ -18,6 +18,10 @@
     ]
     ++ lib.optionals gui [./gui.nix];
 
+  nixpkgs.overlays = [
+    (import ../../packages/overlay.nix)
+  ];
+
   home-manager = {
     useGlobalPkgs = true;
     extraSpecialArgs = {

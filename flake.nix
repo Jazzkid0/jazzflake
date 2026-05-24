@@ -50,6 +50,9 @@
 
     sshKeys = import ./modules/common/ssh-keys.nix;
 
+    slippiPkgs = nixpkgs.legacyPackages.x86_64-linux.extend
+      (import ./packages/overlay.nix);
+
     mkSystem = name: cfg:
       nixpkgs.lib.nixosSystem {
         specialArgs = {
@@ -85,5 +88,14 @@
     };
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+
+    packages.x86_64-linux = {
+      slippi-check-updates = slippiPkgs.slippi-check-updates;
+    };
+
+    apps.x86_64-linux.slippi-update = {
+      type = "app";
+      program = nixpkgs.lib.getExe slippiPkgs.slippi-check-updates;
+    };
   };
 }
