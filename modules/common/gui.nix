@@ -1,6 +1,8 @@
 {
   inputs,
   pkgs,
+  lib,
+  config,
   ...
 }: {
   imports = [
@@ -17,6 +19,10 @@
     };
 
     boot.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_drm" "nvidia_uvm"];
+
+    systemd.services.nvidia-persistenced = {
+      serviceConfig.ExecStart = lib.mkForce "/run/current-system/sw/bin/nvidia-persistenced --verbose";
+    };
 
     services.xserver.enable = false;
 
@@ -41,7 +47,9 @@
       jack.enable = true;
     };
 
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = [
+      config.hardware.nvidia.package.bin
+    ] ++ (with pkgs; [
       # Gfx tools, maybe remove after testing
       vulkan-tools
       mesa-demos
@@ -49,6 +57,6 @@
       pavucontrol
       playerctl
       pulseaudio # provides pactl, paplay etc.
-    ];
+    ]);
   };
 }
