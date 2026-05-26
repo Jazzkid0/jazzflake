@@ -115,8 +115,8 @@ in {
 
         ## PROGRAMS ##
 
-        "SUPER, D, exec, ${pkgs.tofi}/bin/tofi-drun | xargs hyprctl dispatch exec --"
-        "SUPER SHIFT, D, exec, ${pkgs.tofi}/bin/tofi-run | exargs hyprctl dispatch exec --"
+        "SUPER, D, exec, ${pkgs.tofi}/bin/tofi-drun | xargs hyprctl dispatch exec -- "
+        "SUPER SHIFT, D, exec, ${pkgs.tofi}/bin/tofi-run | xargs hyprctl dispatch exec -- "
 
         "SUPER, H, exec, ${pkgs.alacritty}/bin/alacritty"
 
