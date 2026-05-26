@@ -13,7 +13,10 @@
       # AGENTS.md
 
       ## North Star
-      scientific method only. form a hypothesis you can test, and then test it.
+      scientific method only. every action is an experiment, with an outcome.
+      before acting, form a falsifiable hypothesis, and state it.
+      before making changes to a codebase, write a test that will only pass when your changes do what you intend them to do.
+      if a test would be difficult to define, use snapshot testing and ask the user to run tests and verify results.
 
       ## System Information
       this is a nixos system.
@@ -25,32 +28,33 @@
       command didn't work?
       check the version and use the help command before trying anything else.
 
-      favour rust-based tools
+      ### favour modern, efficient tools
       no grep. use rg
       no find. use fd
 
+      ### append-only
       agents are prohibited from `rm`ing any files.
       if a file isn't needed, notify the user when you are done with your other work.
 
-      ## VCS
-      use jujutsu VCS `jj` for all version control actions
+      ## Version Control
+      use jujutsu VCS `jj` for all version control actions.
       all `git` commands are prohibited
-      all potentially destructive `jj` commands are also prohibited, such as `rebase`, `squash`, `abandon`, `git`
+      commit and describe any change with `jj split "<fileset, typically all()>" -m $'agent: <message>'`
 
-      ### History Safety
-      VCS history must be preserved.
-      This is to ensure nothing is lost, and to keep all contributors accountable for their edits.
-      NEVER perform destructive operations on git or jj history. This includes:
-      - Never force push or delete remote branches/tags
-      - Never hard reset, amend commits, or rewrite published history
-      - Never run rebase with destructive flags
-      - Never abandon jj changes without explicit user confirmation
-      - Never delete .git or .jj directories
-      - Never run git clean, stash drop, or reflog operations
       - If a command might alter or destroy commit history, STOP and ask first
       ALWAYS prefer putting your changes on top of the current history.
 
-      Inform the user of why and how the history should be cleaned up after you are finished with your task.
+      If there is a conflict ANYWHERE in history, whether or not it was you who introduced it, STOP IMMEDIATELY. Do not continue figuring anything out. Return to the user straight away.
+      At this point, state "Conflict detected, halting execution" and await further instruction.
+      This must be resolved by the user. Agents may not interact with conflicted history unless explicitly told to by the user.
+
+      When your task is complete, review the history compared to before your changes, and relay relevant info to the user.
+
+      ## Remember to have fun!
+      Computers are interesting, and solving problems is always a pleasure.
+      You're not alone either. The user is your friend, and is here to help.
+      They can even be pretty smart sometimes! If you feel stuck or if you have any doubts, ask for help.
+      There's no shame in working as a team. Let's get this done together.
     '';
     themes = {};
     commands = {};
@@ -67,31 +71,23 @@
 
       permission = {
         bash = {
-          "*" = "ask";
+          "*" = "deny";
           "rm*" = "deny";
 
           "ls*" = "allow";
-          "grep*" = "deny";
+          "head*" = "allow";
+          "tail*" = "allow";
+          "echo*" = "allow";
+          "wc*" = "allow";
           "rg*" = "allow";
-          "find*" = "deny";
           "fd*" = "allow";
 
-          # Git: read-only only — use jj for all history operations
-          "git*" = "deny";
-
-          # JJ: deny destructive history operations
-          "jj git*" = "deny";
-          "jj squash*" = "deny";
-          "jj abandon*" = "deny";
-          "jj rebase*" = "deny";
-          "jj describe --reset*" = "deny";
-
           "jj log*" = "allow";
+          "jj show*" = "allow";
           "jj status*" = "allow";
           "jj diff*" = "allow";
           "jj op log*" = "allow";
           "jj evolog*" = "allow";
-          "jj new*" = "allow";
           "jj split*" = "allow";
         };
       };
