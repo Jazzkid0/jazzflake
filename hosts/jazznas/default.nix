@@ -27,6 +27,7 @@
     ../../modules/services/lidarr.nix
     # ../../modules/services/readarr.nix # TODO: Replace with shelfmark
     ../../modules/services/bazarr.nix
+    ../../modules/services/storage-management.nix
     ../../modules/services/jellyseerr.nix
   ];
 
