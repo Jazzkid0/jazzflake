@@ -1,7 +1,6 @@
 {
   writeShellApplication,
   curl,
-  diffutils,
   jq,
   nix,
   nix-prefetch,
@@ -10,7 +9,6 @@ writeShellApplication {
   name = "slippi-check-updates";
   runtimeInputs = [
     curl
-    diffutils
     jq
     nix
     nix-prefetch
@@ -41,20 +39,11 @@ writeShellApplication {
       [netplay-beta]=true
     )
 
-    # Resolve flake root
-    FLAKE_DIR="$(dirname "$(readlink -f "$0")")"
-    if [ -n "''${FLAKE_SOURCE_DIR:-}" ]; then
-      FLAKE_ROOT="$FLAKE_SOURCE_DIR"
-    else
-      DIR="$FLAKE_DIR"
-      while [ "$DIR" != "/" ]; do
-        if [ -f "$DIR/hashes.nix" ]; then
-          FLAKE_ROOT="$DIR"
-          break
-        fi
-        DIR="$(dirname "$DIR")"
-      done
-      FLAKE_ROOT="''${FLAKE_ROOT:-$PWD}"
+    # Resolve flake root — expects to be run from the flake root
+    FLAKE_ROOT="$PWD"
+    if [ ! -f "$FLAKE_ROOT/packages/slippi/hashes.nix" ]; then
+      echo "error: run this from the flake root (packages/slippi/hashes.nix not found in \$PWD)" >&2
+      exit 1
     fi
 
     bold="$(tput bold 2>/dev/null || echo "")"
@@ -70,7 +59,7 @@ writeShellApplication {
 
     get_current_version() {
       local pkg="$1"
-      nix eval --raw --file "$FLAKE_ROOT/hashes.nix" "$pkg.version"
+      nix eval --raw --file "$FLAKE_ROOT/packages/slippi/hashes.nix" "$pkg.version"
     }
 
     get_latest_release() {
@@ -140,45 +129,28 @@ writeShellApplication {
     fi
 
     if [ "$apply_mode" = true ]; then
-      # Generate diff
-      HASHES="$FLAKE_ROOT/hashes.nix"
-      MODIFIED="$(mktemp)"
-
-      cp "$HASHES" "$MODIFIED"
+      HASHES="$FLAKE_ROOT/packages/slippi/hashes.nix"
 
       for pkg in launcher netplay playback netplay-beta; do
         if [ -z "''${new_version[$pkg]:-}" ]; then
           continue
         fi
-
         old_v="$(get_current_version "$pkg")"
-        old_h="$(nix eval --raw --file "$FLAKE_ROOT/hashes.nix" "$pkg.hash")"
+        old_h="$(nix eval --raw --file "$HASHES" "$pkg.hash")"
 
-        # Replace version line (escape dots in regex)
         escaped_old_v="$(printf '%s' "$old_v" | sed 's/\./\\./g')"
-        sed -i "s|version = \"$escaped_old_v\"|version = \"''${new_version[$pkg]}\"|" "$MODIFIED"
-        # Replace hash line (use | delimiter since hashes can contain /)
-        sed -i "s|hash = \"$old_h\"|hash = \"''${new_hash[$pkg]}\"|" "$MODIFIED"
+        sed -i "s|version = \"$escaped_old_v\"|version = \"''${new_version[$pkg]}\"|" "$HASHES"
+        sed -i "s|hash = \"$old_h\"|hash = \"''${new_hash[$pkg]}\"|" "$HASHES"
       done
 
       echo "" >&2
-      echo "Diff for $FLAKE_ROOT/hashes.nix:" >&2
-      echo "Apply with:  nix run .#update -- --apply | jj apply -" >&2
-      echo "" >&2
-
-      (cd "$FLAKE_ROOT" && diff -u hashes.nix "$MODIFIED") |
-        sed 's|^+++ .*|+++ hashes.nix|' || true
-
-      rm -f "$MODIFIED"
+      echo "Updated $HASHES" >&2
+      echo "Run:  nix build .#slippi-launcher .#slippi-netplay .#slippi-playback .#slippi-netplay-beta" >&2
+      echo "Then commit the changes." >&2
     else
       echo ""
-      echo "To update: edit $FLAKE_ROOT/hashes.nix, bump versions, then run:" >&2
-      echo "  nix build $FLAKE_ROOT#slippi-<pkg>" >&2
-      echo "Nix will fail on hash mismatch and print the correct SRI hash." >&2
-      echo "" >&2
-      echo "Or run with --apply to auto-compute the diff:" >&2
-      echo "  nix run .#update -- --apply" >&2
-      echo "  nix run .#update -- --apply | jj apply -" >&2
+      echo "To update, run with --apply to patch hashes.nix directly:" >&2
+      echo "  nix run .#slippi-update -- --apply" >&2
     fi
   '';
 }

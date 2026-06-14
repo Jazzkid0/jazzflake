@@ -90,7 +90,14 @@
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
 
     packages.x86_64-linux = {
-      slippi-check-updates = slippiPkgs.slippi-check-updates;
+      inherit (slippiPkgs)
+        slippi-check-updates
+        slippi-launcher
+        slippi-launcher-desktop
+        slippi-netplay
+        slippi-netplay-beta
+        slippi-playback
+        ;
     };
 
     apps.x86_64-linux.slippi-update = {
