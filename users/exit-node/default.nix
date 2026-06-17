@@ -1,5 +1,4 @@
 {
-  pkgs,
   sshKeys,
   user,
   ...
@@ -8,7 +7,6 @@
     isNormalUser = true;
     description = user;
     extraGroups = ["networkmanager" "wheel"];
-    shell = pkgs.zsh;
     openssh.authorizedKeys.keys = builtins.attrValues sshKeys;
   };
 
