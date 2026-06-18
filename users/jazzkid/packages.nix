@@ -39,7 +39,6 @@
     uv
     ragenix
     nmap
-    steam-run
     pay-respects
     attic-client
     jq

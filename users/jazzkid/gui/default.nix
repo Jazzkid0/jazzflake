@@ -35,6 +35,7 @@
     libreoffice
     losslesscut-bin
     slippi-launcher-desktop
+    steam-run
     # once cache works:
     # helium
   ];
