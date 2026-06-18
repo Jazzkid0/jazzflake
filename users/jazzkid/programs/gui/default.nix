@@ -36,9 +36,9 @@
     vlc
     libreoffice
     losslesscut-bin
+    slippi-launcher-desktop
     # once cache works:
     # helium
-    # slippi
   ];
 
   home.sessionVariables = {
