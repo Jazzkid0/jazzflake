@@ -6,11 +6,11 @@
 }: {
   imports =
     [
-      ./programs/tui
+      ./programs
       ./packages.nix
     ]
     ++ lib.optionals gui [
-      ./programs/gui
+      ./gui
     ];
 
   home.username = user;
