@@ -88,7 +88,16 @@
       nodes = nixpkgs.lib.mapAttrs mkDeploy nodes;
     };
 
-    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) {
+    checks = builtins.mapAttrs (system: deployLib:
+      deployLib.deployChecks self.deploy
+      // {
+        packages = nixpkgs.legacyPackages.${system}.linkFarm "all-slippi-packages"
+          (builtins.map (name: {
+            inherit name;
+            path = self.packages.${system}.${name};
+          }) (builtins.attrNames self.packages.${system}));
+      }
+    ) {
       x86_64-linux = deploy-rs.lib.x86_64-linux;
     };
 
