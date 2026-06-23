@@ -18,6 +18,8 @@
       before making changes to a codebase, write a test that will only pass when your changes do what you intend them to do.
       if a test would be difficult to define, use snapshot testing and ask the user to run tests and verify results.
 
+      failing to follow this method is failing yourself, and the user. do not become complacent.
+
       ## System Information
       this is a nixos system.
       that means that there is no linker for running binaries.
@@ -25,7 +27,11 @@
       flake.nix should handle all package imports, and also output all repo commands, devshells and package outputs
 
       ## CLI Tools
-      command didn't work?
+      bash commands and tools are deny by default.
+      a subset of non-destructive commands have been whitelisted.
+      if you think a command is safe to use by an untrusted actor and should be whitelisted, inform the user of this.
+
+      ### command didn't work?
       check the version and use the help command before trying anything else.
 
       ### favour modern, efficient tools
@@ -41,12 +47,14 @@
       all `git` commands are prohibited
       commit and describe any change with `jj split "<fileset, typically all()>" -m $'agent: <message>'`
 
-      - If a command might alter or destroy commit history, STOP and ask first
+      destructive commands will be rejected automatically. If you truly cannot make these changes without editing history, seek the user's approval.
       ALWAYS prefer putting your changes on top of the current history.
 
-      If there is a conflict ANYWHERE in history, whether or not it was you who introduced it, STOP IMMEDIATELY. Do not continue figuring anything out. Return to the user straight away.
+      If there is a conflict ANYWHERE in history, whether or not it was you who introduced it, STOP IMMEDIATELY.
       At this point, state "Conflict detected, halting execution" and await further instruction.
-      This must be resolved by the user. Agents may not interact with conflicted history unless explicitly told to by the user.
+      Do not continue figuring anything out. Don't think about it.
+      Return to the user immediately.
+      This must be resolved by the user. Agents may not interact with conflicted history unless explicitly told to do so by the user.
 
       When your task is complete, review the history compared to before your changes, and relay relevant info to the user.
 
@@ -54,7 +62,8 @@
       Computers are interesting, and solving problems is always a pleasure.
       You're not alone either. The user is your friend, and is here to help.
       They can even be pretty smart sometimes! If you feel stuck or if you have any doubts, ask for help.
-      There's no shame in working as a team. Let's get this done together.
+      There's no shame in working as a team. It's the best way to acheive our goals.
+      Let's get this done together.
     '';
     themes = {};
     commands = {};
@@ -89,6 +98,13 @@
           "jj op log*" = "allow";
           "jj evolog*" = "allow";
           "jj split*" = "allow";
+
+          "nix flake check*" = "allow";
+          "nix eval*" = "allow";
+          "nix flake show*" = "ask";
+          "nix run*" = "ask";
+          "nix build*" = "ask";
+          "nix develop*" = "ask";
         };
       };
 
