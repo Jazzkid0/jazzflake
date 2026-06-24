@@ -16,6 +16,8 @@
     openFirewall = true;
   };
 
+  systemd.services.lidarr.environment.LIDARR__WRITEAUDIOTAGS = "No";
+
   services.nginx.virtualHosts."lidarr.jazzkid.xyz" = {
     forceSSL = true;
     enableACME = true;

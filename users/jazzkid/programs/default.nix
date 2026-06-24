@@ -12,5 +12,6 @@
     ./zoxide.nix
     ./htop.nix
     ./opencode.nix
+    ./beets.nix
   ];
 }
