@@ -90,6 +90,7 @@
           "wc*" = "allow";
           "rg*" = "allow";
           "fd*" = "allow";
+          "jq*" = "allow";
 
           "jj log*" = "allow";
           "jj show*" = "allow";
