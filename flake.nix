@@ -24,6 +24,10 @@
       url = "github:Jazzkid0/nvim";
       flake = false;
     };
+    helium = {
+      url = "github:AlvaroParker/helium-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -112,6 +116,7 @@
         slippi-netplay-beta
         slippi-playback
         ;
+      helium = inputs.helium.packages.x86_64-linux.default;
     };
 
     apps.x86_64-linux.slippi-update = {
