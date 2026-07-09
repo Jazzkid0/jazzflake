@@ -84,8 +84,6 @@
           "rm*" = "deny";
 
           "ls*" = "allow";
-          "head*" = "allow";
-          "tail*" = "allow";
           "echo*" = "allow";
           "wc*" = "allow";
           "rg*" = "allow";
