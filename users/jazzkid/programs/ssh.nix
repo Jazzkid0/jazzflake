@@ -2,67 +2,67 @@ _: {
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
+    settings = {
       "*" = {
-        forwardAgent = true;
+        ForwardAgent = true;
       };
       "github_jazzkid" = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "~/.ssh/id_ed25519_jazzkid";
-        identitiesOnly = true;
+        HostName = "github.com";
+        User = "git";
+        IdentityFile = "~/.ssh/id_ed25519_jazzkid";
+        IdentitiesOnly = true;
       };
       "github_public" = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "~/.ssh/id_ed25519_public";
-        identitiesOnly = true;
+        HostName = "github.com";
+        User = "git";
+        IdentityFile = "~/.ssh/id_ed25519_public";
+        IdentitiesOnly = true;
       };
       "dev" = {
-        hostname = "dev.jazzkid.xyz";
-        user = "jazzkid";
+        HostName = "dev.jazzkid.xyz";
+        User = "jazzkid";
       };
       "server" = {
-        hostname = "dev.jazzkid.xyz";
-        user = "jazzkid";
+        HostName = "dev.jazzkid.xyz";
+        User = "jazzkid";
       };
       "jazzserver" = {
-        hostname = "dev.jazzkid.xyz";
-        user = "jazzkid";
+        HostName = "dev.jazzkid.xyz";
+        User = "jazzkid";
       };
       "dev.jazzkid.xyz" = {
-        hostname = "dev.jazzkid.xyz";
-        user = "jazzkid";
+        HostName = "dev.jazzkid.xyz";
+        User = "jazzkid";
       };
       "jazznas" = {
-        hostname = "nas.jazzkid.xyz";
-        user = "jazzkid";
+        HostName = "nas.jazzkid.xyz";
+        User = "jazzkid";
       };
       "nas" = {
-        hostname = "nas.jazzkid.xyz";
-        user = "jazzkid";
+        HostName = "nas.jazzkid.xyz";
+        User = "jazzkid";
       };
       "nas.jazzkid.xyz" = {
-        hostname = "nas.jazzkid.xyz";
-        user = "jazzkid";
+        HostName = "nas.jazzkid.xyz";
+        User = "jazzkid";
       };
       "git_nas" = {
-        hostname = "nas.jazzkid.xyz";
-        user = "git";
-        identityFile = "~/.ssh/id_ed25519";
-        identitiesOnly = true;
+        HostName = "nas.jazzkid.xyz";
+        User = "git";
+        IdentityFile = "~/.ssh/id_ed25519";
+        IdentitiesOnly = true;
       };
       "pc" = {
-        hostname = "pc.jazzkid.xyz";
-        user = "jazzkid";
+        HostName = "pc.jazzkid.xyz";
+        User = "jazzkid";
       };
       "pc.jazzkid.xyz" = {
-        hostname = "pc.jazzkid.xyz";
-        user = "jazzkid";
+        HostName = "pc.jazzkid.xyz";
+        User = "jazzkid";
       };
       "jazznode" = {
-        hostname = "exit-node.jazzkid.xyz";
-        user = "exit-node";
+        HostName = "exit-node.jazzkid.xyz";
+        User = "exit-node";
       };
     };
   };
