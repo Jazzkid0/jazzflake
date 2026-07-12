@@ -62,6 +62,19 @@
     slippiPkgs = nixpkgs.legacyPackages.x86_64-linux.extend
       (import ./packages/overlay.nix);
 
+    deployPkgs = import nixpkgs {
+      system = "x86_64-linux";
+      overlays = [
+        deploy-rs.overlays.default
+        (self: super: {
+          deploy-rs = {
+            inherit (nixpkgs.legacyPackages.x86_64-linux) deploy-rs;
+            lib = super.deploy-rs.lib;
+          };
+        })
+      ];
+    };
+
     mkSystem = name: cfg:
       nixpkgs.lib.nixosSystem {
         specialArgs = {
@@ -81,7 +94,7 @@
 
     mkDeploy = name: cfg: {
       hostname = cfg.domain;
-      profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.${name};
+      profiles.system.path = deployPkgs.deploy-rs.lib.activate.nixos self.nixosConfigurations.${name};
     };
   in {
     nixosConfigurations = nixpkgs.lib.mapAttrs mkSystem nodes;
@@ -96,13 +109,13 @@
       deployLib.deployChecks self.deploy
       // {
         packages = nixpkgs.legacyPackages.${system}.linkFarm "all-slippi-packages"
-          (builtins.map (name: {
+          (map (name: {
             inherit name;
             path = self.packages.${system}.${name};
           }) (builtins.attrNames self.packages.${system}));
       }
     ) {
-      x86_64-linux = deploy-rs.lib.x86_64-linux;
+      x86_64-linux = deployPkgs.deploy-rs.lib;
     };
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
