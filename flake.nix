@@ -59,7 +59,8 @@
 
     sshKeys = import ./modules/common/ssh-keys.nix;
 
-    slippiPkgs = nixpkgs.legacyPackages.x86_64-linux.extend
+    slippiPkgs =
+      nixpkgs.legacyPackages.x86_64-linux.extend
       (import ./packages/overlay.nix);
 
     deployPkgs = import nixpkgs {
@@ -84,12 +85,16 @@
           home-manager = inputs.home-manager;
           gui = cfg.gui or false;
         };
-        modules = [
-          ./hosts/${name}
-        ] ++ (if cfg.minimal or false
-          then [ ./modules/common/core.nix ]
-          else [ inputs.agenix.nixosModules.default ./modules/common ])
-          ++ [ ./users/${cfg.user} ];
+        modules =
+          [
+            ./hosts/${name}
+          ]
+          ++ (
+            if cfg.minimal or false
+            then [./modules/common/core.nix]
+            else [inputs.agenix.nixosModules.default ./modules/common]
+          )
+          ++ [./users/${cfg.user}];
       };
 
     mkDeploy = name: cfg: {
@@ -105,23 +110,27 @@
       nodes = nixpkgs.lib.mapAttrs mkDeploy nodes;
     };
 
-    checks = builtins.mapAttrs (system: deployLib:
-      deployLib.deployChecks self.deploy
-      // {
-        packages = nixpkgs.legacyPackages.${system}.linkFarm "all-slippi-packages"
-          (map (name: {
-            inherit name;
-            path = self.packages.${system}.${name};
-          }) (builtins.attrNames self.packages.${system}));
-      }
-    ) {
-      x86_64-linux = deployPkgs.deploy-rs.lib;
-    };
+    checks =
+      builtins.mapAttrs (
+        system: deployLib:
+          deployLib.deployChecks self.deploy
+          // {
+            packages =
+              nixpkgs.legacyPackages.${system}.linkFarm "all-slippi-packages"
+              (map (name: {
+                inherit name;
+                path = self.packages.${system}.${name};
+              }) (builtins.attrNames self.packages.${system}));
+          }
+      ) {
+        x86_64-linux = deployPkgs.deploy-rs.lib;
+      };
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
 
     packages.x86_64-linux = {
-      inherit (slippiPkgs)
+      inherit
+        (slippiPkgs)
         slippi-check-updates
         slippi-launcher
         slippi-launcher-desktop

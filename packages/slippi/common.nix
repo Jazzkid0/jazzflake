@@ -18,9 +18,9 @@ appimageTools.wrapType2 (
       appImageContents
       extraInstallCommands
       ;
-    nativeBuildInputs = [ makeWrapper ];
-    extraPkgs =
-      pkgs: with pkgs; [
+    nativeBuildInputs = [makeWrapper];
+    extraPkgs = pkgs:
+      with pkgs; [
         curl
         zlib
         mpg123

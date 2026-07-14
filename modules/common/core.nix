@@ -1,4 +1,9 @@
-{pkgs, lib, sshKeys, ...}: {
+{
+  pkgs,
+  lib,
+  sshKeys,
+  ...
+}: {
   imports = [
     ./networking.nix
   ];

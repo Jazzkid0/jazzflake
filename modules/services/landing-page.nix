@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   indexHtml = ''
     <!DOCTYPE html>
     <html lang="en">
@@ -136,7 +135,6 @@ let
       );
     });
   '';
-
 in {
   services.nginx.virtualHosts."home.jazzkid.xyz" = {
     forceSSL = true;

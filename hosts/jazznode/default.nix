@@ -1,4 +1,9 @@
-{config, lib, pkgs, ...}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -7,7 +12,7 @@
     grub = {
       enable = true;
       efiSupport = true;
-      devices = [ "nodev" ];
+      devices = ["nodev"];
     };
     efi = {
       canTouchEfiVariables = true;
@@ -19,7 +24,7 @@
   zramSwap.enable = true;
 
   networking.hostName = "jazznode";
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [22];
 
   services.tailscale.useRoutingFeatures = "both";
 
