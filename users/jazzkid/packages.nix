@@ -16,7 +16,7 @@
     wakelan
     wireguard-tools
     gleam
-    erlang_27
+    beam27Packages.erlang
     rebar3
     nodejs
     bun
