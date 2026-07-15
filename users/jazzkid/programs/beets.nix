@@ -17,7 +17,7 @@
         auto = true;
         synced = true;
         keep_synced = true;
-        sources = ["lrclib" "google" "genius" "musixmatch" "tekstowo"];
+        sources = ["lrclib" "google" "genius"];
       };
     };
   };
