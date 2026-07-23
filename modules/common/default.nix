@@ -17,7 +17,10 @@
       ./node-exporter.nix
       ./unfree-whitelist.nix
     ]
-    ++ lib.optionals gui [./gui.nix];
+    ++ lib.optionals gui [
+      ./gui.nix
+      inputs.stylix.nixosModules.stylix
+    ];
 
   nixpkgs.overlays = [
     (import ../../packages/overlay.nix)
@@ -29,6 +32,9 @@
       inherit inputs user gui;
       opencodeEnvironmentFile = config.age.secrets.opencode-env.path or null;
     };
+    sharedModules = lib.optionals gui [
+      inputs.stylix.homeModules.stylix
+    ];
     users.${user} = import ../../users/${user}/home.nix;
   };
 

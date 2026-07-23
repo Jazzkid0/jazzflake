@@ -2,6 +2,7 @@
   imports = [
     ./packages.nix
     ./fonts.nix
+    ./stylix.nix
     ./hyprland
     ./waybar.nix
     ./alacritty.nix

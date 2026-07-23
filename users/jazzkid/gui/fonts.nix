@@ -1,17 +1,5 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     nerd-fonts.roboto-mono
   ];
-
-  fonts.fontconfig = {
-    enable = true;
-    defaultFonts.monospace = [
-      "roboto-mono"
-    ];
-  };
 }
