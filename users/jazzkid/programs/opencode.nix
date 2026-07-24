@@ -102,10 +102,6 @@
 
           "nix flake check*" = "allow";
           "nix eval*" = "allow";
-          "nix flake show*" = "ask";
-          "nix run*" = "ask";
-          "nix build*" = "ask";
-          "nix develop*" = "ask";
         };
       };
 
