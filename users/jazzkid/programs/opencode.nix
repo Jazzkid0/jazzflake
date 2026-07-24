@@ -89,6 +89,8 @@
           "rg*" = "allow";
           "fd*" = "allow";
           "jq*" = "allow";
+          "man*" = "allow";
+          "which*" = "allow";
 
           "jj log*" = "allow";
           "jj show*" = "allow";
