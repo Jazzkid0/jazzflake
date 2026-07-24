@@ -1,5 +1,8 @@
 local mod = "SUPER"
 
+hl.env("XCURSOR_THEME", "Vanilla-DMZ")
+hl.env("XCURSOR_SIZE", "24")
+
 -- Exit / Kill
 hl.bind((mod .. " + SHIFT + Escape"), hl.dsp.exec_cmd("@powerMenu@/bin/power-menu"))
 hl.bind((mod .. " + K"), hl.dsp.window.close())
