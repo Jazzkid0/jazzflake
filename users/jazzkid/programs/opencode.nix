@@ -82,6 +82,8 @@
         bash = {
           "*" = "deny";
           "rm*" = "deny";
+          "*2>/dev/null" = "deny";
+          "*2>&1" = "deny";
 
           "ls*" = "allow";
           "echo*" = "allow";
