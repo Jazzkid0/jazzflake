@@ -3,84 +3,78 @@
   pkgs,
   ...
 }: let
-  gitName = "jazzkid";
-  gitEmail = "jazzkid@jazzkid.xyz";
-  repoUrl = "github_jazzkid:Jazzkid0/package-attic.git";
-  repoPath = "/var/lib/package-attic";
+  repoPath = "/home/jazzkid/dev/nix/jazzflake";
 in {
-  age.secrets.attic-token = {
-    file = ../../secrets/attic-token.age;
-    owner = "jazzkid";
-    group = "users";
-  };
-
-  age.secrets.attic-signing-key = {
-    file = ../../secrets/attic-signing-key.age;
-    owner = "jazzkid";
-    group = "users";
-  };
-
-  systemd.services.attic-push = {
-    description = "Build and push packages to the attic cache";
-    wants = ["network-online.target" "atticd.service"];
-    after = ["network-online.target" "atticd.service"];
+  systemd.services.nix-cache-build = {
+    description = "Build all flake outputs and push to attic cache";
+    wants = [ "atticd.service" ];
+    after = [ "atticd.service" ];
 
     serviceConfig = {
       Type = "oneshot";
       User = "jazzkid";
-      EnvironmentFile = config.age.secrets.attic-token.path;
+      WorkingDirectory = repoPath;
+      Nice = 10;
+      IOSchedulingClass = "idle";
+      CPUQuota = "80%";
+      MemoryHigh = "6G";
+      MemoryMax = "8G";
     };
+
+    environment.XDG_CONFIG_HOME = "/etc";
 
     path = with pkgs; [
       nix
-      openssh
-      git
-      jujutsu
       attic-client
     ];
 
     script = ''
       set -euo pipefail
+      FAILED=0
 
-      if [ ! -d "${repoPath}/.git" ]; then
-        echo "Cloning packages repo..."
-        jj git clone ${repoUrl} ${repoPath}
-        cd ${repoPath}
-        jj git fetch --config user.name=${gitName} --config user.email=${gitEmail}
-        jj new main --config user.name=${gitName} --config user.email=${gitEmail}
-        jj bookmark create jazzpkgs --config user.name=${gitName} --config user.email=${gitEmail}
-      else
-        cd ${repoPath}
-        jj git fetch --config user.name=${gitName} --config user.email=${gitEmail}
-        jj new main --config user.name=${gitName} --config user.email=${gitEmail}
-        jj bookmark set jazzpkgs --config user.name=${gitName} --config user.email=${gitEmail} --allow-backwards
+      HOSTS=$(nix eval --json .#nixosConfigurations --apply 'x: builtins.attrNames x')
+      BUILT_PATHS=""
+      for host in $HOSTS; do
+        echo "Building nixosConfiguration: $host"
+        if out=$(nix build --print-out-paths ".#nixosConfigurations.$host.config.system.build.toplevel" 2>&1 | tee /dev/stderr); then
+          BUILT_PATHS="$BUILT_PATHS $out"
+        else
+          echo "FAILED to build $host"
+          FAILED=1
+        fi
+      done
+
+      PACKAGES=$(nix eval --json .#packages.x86_64-linux --apply 'x: builtins.attrNames x')
+      for pkg in $PACKAGES; do
+        echo "Building package: $pkg"
+        if out=$(nix build --print-out-paths ".#packages.x86_64-linux.$pkg" 2>&1 | tee /dev/stderr); then
+          BUILT_PATHS="$BUILT_PATHS $out"
+        else
+          echo "FAILED to build $pkg"
+          FAILED=1
+        fi
+      done
+
+      if [ -n "$BUILT_PATHS" ]; then
+        echo "$BUILT_PATHS" | xargs attic push main
       fi
 
-
-      nix flake update
-      jj commit -m"auto: flake update" --config user.name=${gitName} --config user.email=${gitEmail}
-
-      PACKAGES=$(nix run .#build-all)
-
-      echo "$PACKAGES" | xargs nix store sign --key-file ${config.age.secrets.attic-signing-key.path} --recursive
-
-      echo "$PACKAGES" | xargs attic push main
-
-      jj git push -b jazzpkgs --config user.name=${gitName} --config user.email=${gitEmail}
-
-      echo "packages updated successfully"
+      if [ "$FAILED" -eq 0 ]; then
+        echo "Build complete — all targets succeeded"
+      else
+        echo "Build complete — some targets failed, see log above"
+      fi
     '';
   };
 
-  # TODO: enable after testing
-  # systemd.timers.attic-push = {
-  #   description = "Daily Attic cache push timer";
-  #   wantedBy = [ "timers.target" ];
-  #
-  #   timerConfig = {
-  #     OnCalendar = "daily";
-  #     RandomizedDelaySec = "1h";
-  #     Persistent = true;
-  #   };
-  # };
+  systemd.timers.nix-cache-build = {
+    description = "Daily attic cache build timer";
+    wantedBy = [ "timers.target" ];
+
+    timerConfig = {
+      OnCalendar = "daily";
+      RandomizedDelaySec = "1h";
+      Persistent = true;
+    };
+  };
 }

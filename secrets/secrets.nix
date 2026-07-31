@@ -10,7 +10,7 @@ in {
   "qbittorrent_conf.age".publicKeys = keys;
   "attic-environment-file.age".publicKeys = jazznasKeys;
   "attic-push-token.age".publicKeys = pushHostKeys;
-  "github-deploy-key.age".publicKeys = jazznasKeys;
+
   "samba-creds.age".publicKeys = keys;
   "opencode-env.age".publicKeys = keys;
 }

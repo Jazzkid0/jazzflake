@@ -57,13 +57,5 @@
     hybrid-sleep.enable = false;
   };
 
-  programs.ssh.extraConfig = ''
-    Host github-jazzflake
-      HostName github.com
-      User git
-      IdentityFile ${config.age.secrets.github-deploy-key.path}
-      IdentitiesOnly yes
-  '';
-
   system.stateVersion = "24.11";
 }
