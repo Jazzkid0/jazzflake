@@ -112,6 +112,9 @@
 
           "nix flake check*" = "allow";
           "nix eval*" = "allow";
+
+          "gleam test*" = "allow";
+          "gleam build*" = "allow";
         };
       };
 
