@@ -70,6 +70,14 @@
     enableMcpIntegration = false;
     settings = {
       shell = "zsh";
+      lsp = {
+        gleam = {
+          command = ["gleam" "lsp"];
+        };
+        typescript = {
+          command = ["typescript-language-server" "--stdio"];
+        };
+      };
       server.port = 32123;
       instructions = ["AGENTS.md" ".agents/"];
       model = "deepseek/deepseek-v4-pro";
