@@ -49,6 +49,7 @@
       jazznode = {
         user = "exit-node";
         domain = "exit-node.jazzkid.xyz";
+        minimal = true;
       };
     };
 
@@ -67,11 +68,11 @@
           gui = cfg.gui or false;
         };
         modules = [
-          inputs.agenix.nixosModules.default
           ./hosts/${name}
-          ./modules/common
-          ./users/${cfg.user}
-        ];
+        ] ++ (if cfg.minimal or false
+          then [ ./modules/common/core.nix ]
+          else [ inputs.agenix.nixosModules.default ./modules/common ])
+          ++ [ ./users/${cfg.user} ];
       };
 
     mkDeploy = name: cfg: {
