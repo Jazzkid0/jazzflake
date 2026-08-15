@@ -1,5 +1,8 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
-    cursor-clip
-  ];
+  services.copyq = {
+    enable = true;
+    package = pkgs.copyq;
+    systemdTarget = "graphical-session.target";
+    forceXWayland = false;
+  };
 }

@@ -43,22 +43,38 @@
       ${pkgs.mako}/bin/makoctl reload
       ${pkgs.procps}/bin/pkill -RTMIN+1 waybar
     '';
+  clipboardPicker =
+    pkgs.writeShellScriptBin "clipboard-picker"
+    ''
+      set -euo pipefail
+
+      items=$(${pkgs.copyq}/bin/copyq eval -- "tab('clipboard'); for (i = 0; i < size(); ++i) print(str(i) + '\\t' + str(read(i)).replace(/\\n/g, ' '));")
+      [ -z "$items" ] && exit 0
+
+      selected=$(printf '%s\n' "$items" | ${pkgs.tofi}/bin/tofi --prompt-text "Clipboard: ")
+      [ -z "$selected" ] && exit 0
+
+      index=''${selected%%$'\t'*}
+      ${pkgs.copyq}/bin/copyq tab clipboard select "$index"
+      ${pkgs.copyq}/bin/copyq paste
+    '';
 
   hyprlandConfig = pkgs.runCommand "hyprland.lua" {} ''
     substitute ${./hyprland.lua} $out \
       --replace-fail '@alacritty@' '${pkgs.alacritty}' \
       --replace-fail '@waybar@' '${pkgs.waybar}' \
-      --replace-fail '@mako@' '${pkgs.mako}' \
-      --replace-fail '@dbus@' '${pkgs.dbus}' \
-      --replace-fail '@cursorClip@' '${pkgs.cursor-clip}' \
-      --replace-fail '@powerMenu@' '${powerMenu}' \
+       --replace-fail '@mako@' '${pkgs.mako}' \
+       --replace-fail '@dbus@' '${pkgs.dbus}' \
+       --replace-fail '@copyq@' '${pkgs.copyq}' \
+       --replace-fail '@clipboardPicker@' '${clipboardPicker}' \
+       --replace-fail '@powerMenu@' '${powerMenu}' \
       --replace-fail '@launcher@' '${launcher}' \
       --replace-fail '@runner@' '${runner}' \
       --replace-fail '@screenshot@' '${screenshot}' \
       --replace-fail '@dndToggle@' '${dndToggle}'
   '';
 in {
-  home.packages = [powerMenu launcher runner screenshot dndToggle];
+  home.packages = [powerMenu launcher runner screenshot dndToggle clipboardPicker];
 
   services.hyprpolkitagent.enable = true;
 
