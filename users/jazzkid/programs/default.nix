@@ -13,5 +13,6 @@
     ./htop.nix
     ./opencode.nix
     ./beets.nix
+    ./ollama.nix
   ];
 }
