@@ -4,18 +4,18 @@ hl.env("XCURSOR_THEME", "Vanilla-DMZ")
 hl.env("XCURSOR_SIZE", "24")
 
 -- Exit / Kill
-hl.bind((mod .. " + SHIFT + Escape"), hl.dsp.exec_cmd("@powerMenu@/bin/power-menu"))
+hl.bind((mod .. " + SHIFT + Escape"), hl.dsp.exec_cmd("@powerMenu@/bin/jazz-power-menu"))
 hl.bind((mod .. " + K"), hl.dsp.window.close())
 hl.bind((mod .. " + CONTROL + K"), hl.dsp.window.kill())
 
 -- Programs
-hl.bind((mod .. " + D"), hl.dsp.exec_cmd("@launcher@/bin/launcher"))
-hl.bind((mod .. " + SHIFT + D"), hl.dsp.exec_cmd("@runner@/bin/runner"))
+hl.bind((mod .. " + D"), hl.dsp.exec_cmd("@launcher@/bin/jazz-launcher"))
+hl.bind((mod .. " + SHIFT + D"), hl.dsp.exec_cmd("@runner@/bin/jazz-runner"))
 hl.bind((mod .. " + H"), hl.dsp.exec_cmd("@alacritty@/bin/alacritty"))
-hl.bind((mod .. " + V"), hl.dsp.exec_cmd("@clipboardPicker@/bin/clipboard-picker"))
+hl.bind((mod .. " + V"), hl.dsp.exec_cmd("@clipboardPicker@/bin/jazz-clipboard-picker"))
 hl.bind((mod .. " + SHIFT + V"), hl.dsp.exec_cmd("@copyq@/bin/copyq show"))
-hl.bind((mod .. " + G"), hl.dsp.exec_cmd("@screenshot@/bin/screenshot"))
-hl.bind((mod .. " + Q"), hl.dsp.exec_cmd("@dndToggle@/bin/dnd-toggle"))
+hl.bind((mod .. " + G"), hl.dsp.exec_cmd("@screenshot@/bin/jazz-screenshot"))
+hl.bind((mod .. " + Q"), hl.dsp.exec_cmd("@dndToggle@/bin/jazz-dnd-toggle"))
 
 -- Window management
 hl.bind((mod .. " + F"), hl.dsp.window.fullscreen())

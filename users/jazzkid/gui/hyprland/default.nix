@@ -1,6 +1,6 @@
 {pkgs, ...}: let
   powerMenu =
-    pkgs.writeShellScriptBin "power-menu"
+    pkgs.writeShellScriptBin "jazz-power-menu"
     ''
       action=$(printf "Preview\nExit hyprland\nExit ly\nReboot\nShutdown" | ${pkgs.tofi}/bin/tofi --prompt-text "Power: ")
       [ -z "$action" ] && exit
@@ -19,32 +19,32 @@
       esac
     '';
   launcher =
-    pkgs.writeShellScriptBin "launcher"
+    pkgs.writeShellScriptBin "jazz-launcher"
     ''
       cmd=$(${pkgs.tofi}/bin/tofi-drun)
       [ -n "$cmd" ] && hyprctl dispatch "hl.dsp.exec_cmd(\"$cmd\")"
     '';
   runner =
-    pkgs.writeShellScriptBin "runner"
+    pkgs.writeShellScriptBin "jazz-runner"
     ''
       cmd=$(${pkgs.tofi}/bin/tofi-run)
       [ -n "$cmd" ] && hyprctl dispatch "hl.dsp.exec_cmd(\"$cmd\")"
     '';
   screenshot =
-    pkgs.writeShellScriptBin "screenshot"
+    pkgs.writeShellScriptBin "jazz-screenshot"
     ''
       mkdir -p "$HOME/downloads/images"
       ${pkgs.hyprshot}/bin/hyprshot -m region -o "$HOME/downloads/images"
     '';
   dndToggle =
-    pkgs.writeShellScriptBin "dnd-toggle"
+    pkgs.writeShellScriptBin "jazz-dnd-toggle"
     ''
       ${pkgs.mako}/bin/makoctl mode -t do-not-disturb
       ${pkgs.mako}/bin/makoctl reload
       ${pkgs.procps}/bin/pkill -RTMIN+1 waybar
     '';
   clipboardPicker =
-    pkgs.writeShellScriptBin "clipboard-picker"
+    pkgs.writeShellScriptBin "jazz-clipboard-picker"
     ''
       set -euo pipefail
 
