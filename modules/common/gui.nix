@@ -28,6 +28,8 @@
 
     programs.hyprland.enable = true;
 
+    security.polkit.enable = true;
+
     services.displayManager.ly = {
       enable = true;
     };
