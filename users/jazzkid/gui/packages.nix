@@ -11,6 +11,7 @@
     libreoffice
     losslesscut-bin
     slippi-launcher-desktop
+    slippi-netplay-beta
     steam-run
     # once cache works:
     # helium
