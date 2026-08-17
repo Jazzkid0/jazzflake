@@ -13,5 +13,11 @@ _: {
         defaultBranch = "main";
       };
     };
+    ignores = [
+      "notes/"
+      "untracked/"
+      "result"
+      "result-*"
+    ];
   };
 }
