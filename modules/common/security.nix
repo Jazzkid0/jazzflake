@@ -11,9 +11,19 @@ in {
   users.users.root.openssh.authorizedKeys.keys = with sshKeys; [jazzsl jazzserver jazznas jazzpc];
 
   nix.settings = {
-    # extra-substituters = [ "https://cachix.jazzkid.xyz/main" ];
-    # trusted-substituters = [ "https://cachix.jazzkid.xyz/main" ];
-    # extra-trusted-public-keys = [ "pastekeyhere" ];
+    substituters = [
+    ];
+    trusted-substituters = [
+      # "https://cachix.jazzkid.xyz/main"
+    ];
+    extra-substituters = [
+      "https://cache.nixos-cuda.org"
+      # "https://cachix.jazzkid.xyz/main"
+    ];
+    extra-trusted-public-keys = [
+      "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+      # "jazzcachekey"
+    ];
   };
 
   age.secrets.attic-push-token = lib.mkIf isPushHost {
