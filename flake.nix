@@ -118,14 +118,6 @@
       builtins.mapAttrs (
         system: deployLib:
           deployLib.deployChecks self.deploy
-          // {
-            packages =
-              nixpkgs.legacyPackages.${system}.linkFarm "all-slippi-packages"
-              (map (name: {
-                inherit name;
-                path = self.packages.${system}.${name};
-              }) (builtins.attrNames self.packages.${system}));
-          }
       ) {
         x86_64-linux = deployPkgs.deploy-rs.lib;
       };
