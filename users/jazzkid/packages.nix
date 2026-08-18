@@ -4,7 +4,6 @@
   ...
 }: {
   home.packages = with pkgs; [
-    inputs.self.packages.x86_64-linux.helium
     vim
     wget
     curl
